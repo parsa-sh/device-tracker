@@ -1,7 +1,7 @@
 
 function AddDevice() {
   return (
-    <div>AddDevice</div>
+    <div style={{textAlign:"center" , fontSize:"54px"}}>AddDevice</div>
   )
 }
 
