@@ -1,20 +1,30 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { users } from "./../utils/users";
+import { useUserStore } from "../utils/userStore";
 
 // eslint-disable-next-line react/prop-types
 function Login({ onLogin }) {
+  const setLoggedInUser = useUserStore((state) => state.setLoggedInUser);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const submit = () => {
-    if (username === "test" && password === "test") {
-      onLogin();
-      navigate("/");
+
+  const handleLogin = () => {
+    const user = users.find(
+      (u) => u.username === username && u.password === password
+    );
+    if (user) {
+      setLoggedInUser({ name: user.name, username ,picture: user.picture });
+      setError("");
+      navigate("/home");
     } else {
-      alert("Invalid username and password");
+      setError("Invalid username or password.");
     }
   };
+
   return (
     <Box
       sx={{ backgroundColor: "black" }}
@@ -52,6 +62,8 @@ function Login({ onLogin }) {
               <TextField
                 label="نام کاربری"
                 required
+                type="text"
+                value={username}
                 dir="rtl"
                 fullWidth
                 onChange={(e) => setUsername(e.target.value)}
@@ -76,6 +88,7 @@ function Login({ onLogin }) {
                 label="کلمه عبور"
                 required
                 type="password"
+                value={password}
                 dir="rtl"
                 fullWidth
                 onChange={(e) => setPassword(e.target.value)}
@@ -101,7 +114,7 @@ function Login({ onLogin }) {
             </Stack>
             <Button
               variant="contained"
-              onClick={submit}
+              onClick={handleLogin}
               sx={{
                 borderRadius: "12px",
                 width: "100%",
@@ -116,6 +129,7 @@ function Login({ onLogin }) {
                 ورود
               </Typography>
             </Button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </Stack>
         </Stack>
         <Stack
