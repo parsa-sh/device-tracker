@@ -1,10 +1,10 @@
-import Map from "./../components/Map"
+import Map from "./../components/Map";
 
 function Home() {
   return (
-   <>
-   <Map/>
-   </>
+    <div style={{width:"100%" , height:"100%"}}>
+      <Map />
+    </div>
   );
 }
 
