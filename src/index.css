@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.sidebar-icon-container {
+  width: 60px;
+  gap: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
+  &:hover {
+    .sidebar-text {
+      visibility: visible;
+    }
+    .sidebar-icons {
+      background-color: #44546c;
+    }
+  }
+  &:active .sidebar-icons {
+    background-color: #6984ac;
+  }
+  .sidebar-text {
+    visibility: hidden;
+    color: white;
+    transition: ease-in-out 0.1s;
+    font-weight: 700;
+    user-select: none;
+  }
+  .sidebar-icons {
+    object-fit: cover;
+    width: 60px;
+    padding: 7px;
+    transition: ease-in-out 0.1s;
+    border-radius: 12px;
+  }
+}
+
+.leaflet-container {
+  height: 100vh !important;
+  width: 100% !important;
+}
