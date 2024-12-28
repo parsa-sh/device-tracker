@@ -1,0 +1,73 @@
+export let devices = [
+  {
+    id: 1,
+    name: "دستگاه ۱",
+    lang: 38.07599603948551,
+    long: 46.27900660170453,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+  },
+  {
+    id: 2,
+    name: "دستگاه ۲",
+    lang: 36.294675813339936,
+    long: 50.00728909618026,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 3,
+    name: "دستگاه ۳",
+    lang: 35.70759110959834,
+    long: 51.25368985498739,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 4,
+    name: "دستگاه ۴",
+    lang: 36.299548933470845,
+    long: 59.606786356313,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 5,
+    name: "دستگاه ۵",
+    lang: 32.648487094050125,
+    long: 51.67227251599078,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 6,
+    name: "دستگاه ۶",
+    lang: 29.6206738367315,
+    long: 52.52625680004241,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 7,
+    name: "دستگاه ۷",
+    lang: 27.19259764903564,
+    long: 56.29416770748109,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 8,
+    name: "دستگاه ۸",
+    lang: 27.201610001788072,
+    long: 60.68817004912268,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 9,
+    name: "دستگاه 9",
+    lang: 36.56383991816309,
+    long: 53.05918751441016,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+  {
+    id: 10,
+    name: "دستگاه 10",
+    lang: 33.49056325301271,
+    long: 48.357893256736915,
+    img: "src/assets/images/device.png",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit."  },
+];

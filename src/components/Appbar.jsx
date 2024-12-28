@@ -36,7 +36,6 @@ function Appbar() {
           direction={"row"}
           justifyContent={"flex-end"}
           alignItems={"center"}
-          paddingLeft={"70px"}
         >
           <Box
             display={"flex"}
@@ -50,8 +49,8 @@ function Appbar() {
               dir="rtl"
               sx={{
                 color: "white",
-                fontSize:"18px",
-                fontWeight:"600",
+                fontSize: "18px",
+                fontWeight: "600",
                 "& .MuiInputBase-input::placeholder": {
                   color: "white",
                   fontWeight: "700",
@@ -60,6 +59,22 @@ function Appbar() {
             />
             <SearchIcon sx={{ color: "white", fontSize: "32px" }} />
           </Box>
+        </Stack>
+        <Stack
+          width={"150px"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignContent={"center"}
+          alignItems={"center"}
+          paddingTop={"auto"}
+          paddingLeft={"12px"}
+        >
+          <img
+            src="src/assets/images/logo.jpg"
+            alt="logo"
+            style={{ width: "50px", height: "50px", borderRadius: "12px" , border:"5px solid #44546D"}}
+          />
         </Stack>
       </Stack>
     </Box>
