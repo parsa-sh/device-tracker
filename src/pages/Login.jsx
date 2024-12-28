@@ -1,10 +1,18 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { users } from "./../utils/users";
 import { useUserStore } from "../utils/userStore";
 
-// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line react/prop-types, no-unused-vars
 function Login({ onLogin }) {
   const setLoggedInUser = useUserStore((state) => state.setLoggedInUser);
   const [username, setUsername] = useState("");
@@ -17,7 +25,7 @@ function Login({ onLogin }) {
       (u) => u.username === username && u.password === password
     );
     if (user) {
-      setLoggedInUser({ name: user.name, username ,picture: user.picture });
+      setLoggedInUser({ name: user.name, username, picture: user.picture });
       setError("");
       navigate("/home");
     } else {
@@ -25,18 +33,26 @@ function Login({ onLogin }) {
     }
   };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") return;
+    setError(false);
+  };
+
   return (
     <Box
       sx={{ backgroundColor: "black" }}
       width={"100vw"}
       height={"100vh"}
-      padding={"84px"}
+      display={"flex"}
+      flexDirection={"row"}
+      justifyContent={"center"}
+      alignItems={"center"}
     >
       <Stack
         direction={"row-reverse"}
         sx={{ backgroundColor: "white", borderRadius: "24px" }}
-        width={"100%"}
-        height={"100%"}
+        width={"80vw"}
+        height={"80vh"}
         alignItems={"center"}
         padding={"32px"}
         gap={"12px"}
@@ -129,7 +145,20 @@ function Login({ onLogin }) {
                 ورود
               </Typography>
             </Button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            <Snackbar
+              open={error}
+              autoHideDuration={3000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                ! نام کاربری و کلمه عبور اشتباه است
+              </Alert>
+            </Snackbar>
           </Stack>
         </Stack>
         <Stack
