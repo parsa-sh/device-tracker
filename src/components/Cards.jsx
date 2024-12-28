@@ -49,7 +49,7 @@ function Cards() {
             justifyContent={"space-between"}
             alignItems={"center"}
             gap={"12px"}
-            bgcolor={"#44546D"}
+            bgcolor={"#1C1C1E"}
             borderRadius={"12px"}
             padding={"7px"}
           >
@@ -64,22 +64,6 @@ function Cards() {
             </Box>
           </Stack>
         ))}
-
-        {/* <Stack
-          direction={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-        >
-          <img
-            src="src/assets/images/device.png"
-            alt="device.png"
-            style={{ width: "70px" }}
-          />
-          <Stack>
-            <Typography></Typography>
-            <Typography></Typography>
-          </Stack>
-        </Stack> */}
       </Stack>
     </Box>
   );
