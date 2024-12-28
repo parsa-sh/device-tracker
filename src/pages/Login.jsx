@@ -51,7 +51,7 @@ function Login({ onLogin }) {
       <Stack
         direction={"row-reverse"}
         sx={{ backgroundColor: "white", borderRadius: "24px" }}
-        width={"80vw"}
+        width={"90vw"}
         height={"80vh"}
         alignItems={"center"}
         padding={"32px"}
