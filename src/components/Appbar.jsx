@@ -1,7 +1,20 @@
 import { Box, InputBase, Stack, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router";
+import { useUserStore } from "../utils/userStore";
+import { useState } from "react";
 
 function Appbar() {
+  const loggedInUser = useUserStore((state) => state.loggedInUser);
+  const logoutUser = useUserStore((state) => state.logoutUser);
+  const navigate = useNavigate();
+  const [open , setOpen] = useState(false)
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/login");
+  };
+
   return (
     <Box sx={{ backgroundColor: "#1C1C1E" }} width={"100%"} height={"100px"}>
       <Stack direction={"row-reverse"} height={"100%"}>
@@ -15,7 +28,8 @@ function Appbar() {
           gap={"12px"}
         >
           <img
-            src="src/assets/images/user.jpg"
+            src={loggedInUser.picture
+            }
             alt="user-pic"
             style={{
               width: "65px",
@@ -27,8 +41,9 @@ function Appbar() {
           <Typography
             sx={{ color: "white", fontWeight: "900", fontSize: "18px" }}
           >
-            پارسا شاهسون
+            {loggedInUser.name}
           </Typography>
+          
         </Stack>
         <Stack
           width={"100%"}
@@ -73,7 +88,12 @@ function Appbar() {
           <img
             src="src/assets/images/logo.jpg"
             alt="logo"
-            style={{ width: "50px", height: "50px", borderRadius: "12px" , border:"5px solid #44546D"}}
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "12px",
+              border: "5px solid #44546D",
+            }}
           />
         </Stack>
       </Stack>
