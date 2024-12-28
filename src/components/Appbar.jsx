@@ -1,14 +1,28 @@
-import { Box, InputBase, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputBase,
+  Stack,
+  Typography,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../utils/userStore";
 import { useState } from "react";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Appbar() {
   const loggedInUser = useUserStore((state) => state.loggedInUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const navigate = useNavigate();
-  const [open , setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const handleLogout = () => {
     logoutUser();
@@ -28,8 +42,7 @@ function Appbar() {
           gap={"12px"}
         >
           <img
-            src={loggedInUser.picture
-            }
+            src={loggedInUser.picture}
             alt="user-pic"
             style={{
               width: "65px",
@@ -43,7 +56,38 @@ function Appbar() {
           >
             {loggedInUser.name}
           </Typography>
-          
+          <Stack direction={"column"} position={"relative"} sx={{transition:"ease-in-out 1s"}}>
+            <IconButton color="info" onClick={handleOpen}>
+              {open ? (
+                <ArrowDropUpIcon sx={{ color: "white" }} />
+              ) : (
+                <ArrowDropDownIcon sx={{ color: "white" }} />
+              )}
+            </IconButton>
+            {open ? (
+              <Stack
+                direction={"column"}
+                position={"absolute"}
+                zIndex={"1000"}
+                top={"30px"}
+                right={"0px"}
+                gap={"12px"}
+                border={"0.5px solid grey"}
+                padding={"7px"}
+                borderRadius={"12px"}
+                bgcolor={"white"}
+                sx={{transition:"ease-in-out 1s"}}
+              >
+                <Button variant="contained" onClick={handleLogout} startIcon={<LogoutIcon/>}>logout</Button>
+                <Button variant="contained">test</Button>
+                <Button variant="contained">test</Button>
+                <Button variant="contained">test</Button>
+                <Button variant="contained">test</Button>
+              </Stack>
+            ) : (
+              ""
+            )}
+          </Stack>
         </Stack>
         <Stack
           width={"100%"}
