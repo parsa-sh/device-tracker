@@ -30,7 +30,7 @@ function Appbar() {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#1C1C1E" }} width={"100%"} height={"100px"}>
+    <Box sx={{ backgroundColor: "#1C1C1E" }} width={"100%"} height={"100px"} borderBottom={"2px solid black"}>
       <Stack direction={"row-reverse"} height={"100%"}>
         <Stack
           width={"100%"}
