@@ -35,9 +35,8 @@ function Sidebar() {
       flexDirection={"column"}
       justifyContent={"center"}
       sx={{ backgroundColor: "#1C1C1E", borderTop: "2px solid" }}
-        // pt={"24px"}
       maxHeight={"90vh"}
-      width={"107px"}
+      width={"110px"}
     >
       <Stack
         direction={"column"}
