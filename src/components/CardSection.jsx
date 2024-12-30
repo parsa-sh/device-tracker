@@ -1,9 +1,10 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import { useCardData } from "../utils/userStore";
+import { useCardData , useThemeStore} from "../utils/userStore";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 function CardSection() {
   const { selectedCard, setSelectedCard } = useCardData();
+  const {theme} = useThemeStore();
 
   const handleClear = () => {
     setSelectedCard(null);
@@ -20,7 +21,7 @@ function CardSection() {
           zIndex={"10000"}
           height={"100px"}
           width={"700px"}
-          bgcolor={"#1C1C1E"}
+          bgcolor={theme==="light"?"white":"#1C1C1E"}
           borderRadius={"12px"}
           justifyContent={"space-between"}
           alignItems={"center"}
@@ -37,7 +38,7 @@ function CardSection() {
             direction={"column"}
             alignItems={"flex-end"}
             justifyContent={"space-between"}
-            color={"white"}
+            color={theme==="light"?"black":"white"}
           >
             <Typography>{selectedCard.name}</Typography>
             <Typography>{selectedCard.text}</Typography>
@@ -47,7 +48,7 @@ function CardSection() {
               sx={{ marginBottom: "50px"}}
               onClick={handleClear}
             >
-              <CancelIcon sx={{ color: "white"}} />
+              <CancelIcon sx={theme==="light"?{color:"black"}:{ color: "white"}} />
             </IconButton>
         </Stack>
       ) : (

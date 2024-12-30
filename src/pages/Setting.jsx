@@ -9,16 +9,19 @@ import {
   Stack,
 } from "@mui/material";
 import { useState } from "react";
-import BedtimeIcon from '@mui/icons-material/Bedtime';
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import { useThemeStore } from "../utils/userStore";
 
 function Setting() {
+  const { theme, toggleTheme } = useThemeStore();
   const [lang, setLang] = useState("farsi");
+
   const handleLangChange = (e) => {
     setLang(e.target.value);
   };
   return (
     <Box
-      bgcolor={"#1C1C1E"}
+      bgcolor={theme==="light"?"white":"#1C1C1E"}
       width={"100%"}
       height={"100%"}
       display={"flex"}
@@ -42,9 +45,21 @@ function Setting() {
             <MenuItem value={"english"}>انگلیسی</MenuItem>
           </Select>
         </FormControl>
-        <Stack direction={"row-reverse"} justifyContent={"flex-start"} alignItems={"center"}>
-          <BedtimeIcon color="primary"/>
-          <FormControlLabel control={<Switch defaultChecked />} label="حالت شب"/>
+        <Stack
+          direction={"row-reverse"}
+          justifyContent={"flex-start"}
+          alignItems={"center"}
+        >
+          <BedtimeIcon color="primary" />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={theme === "dark" ? true : false}
+                onChange={toggleTheme}
+              />
+            }
+            label="حالت شب"
+          />
         </Stack>
       </Stack>
     </Box>

@@ -1,15 +1,15 @@
 import { Stack, Box, Typography } from "@mui/material";
 import axios from "axios";
-import { useEffect} from "react";
-import { useCardData } from "../utils/userStore";
-
+import { useEffect } from "react";
+import { useCardData, useThemeStore } from "../utils/userStore";
 
 function Cards() {
-  const { cards, setCards, setSelectedCard , setSelectedMarker } = useCardData();
+  const { cards, setCards, setSelectedCard, setSelectedMarker } = useCardData();
+  const { theme } = useThemeStore();
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
-    setSelectedMarker([card])
+    setSelectedMarker([card]);
   };
 
   const apiGet = async () => {
@@ -23,7 +23,7 @@ function Cards() {
 
   useEffect(() => {
     apiGet();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCards]);
 
   return (
@@ -52,19 +52,35 @@ function Cards() {
         height={"100%"}
         justifyContent={"space-between"}
         alignContent={"center"}
-        sx={{
-          "& .MuiStack-root": {
-            cursor: "pointer",
-            transition: "all 0.1s",
-            boxShadow: "2px 2px 5px 2px #8a8a8a",
-          },
-          "& .MuiStack-root:hover": {
-            transform: "scale(1.06 , 1.06)",
-          },
-          "& .MuiStack-root:active": {
-            backgroundColor: "black",
-          },
-        }}
+        sx={
+          theme === "light"
+            ? {
+                "& .MuiStack-root": {
+                  cursor: "pointer",
+                  transition: "all 0.1s",
+                  boxShadow: "2px 2px 5px 2px #8a8a8a",
+                },
+                "& .MuiStack-root:hover": {
+                  transform: "scale(1.06 , 1.06)",
+                },
+                "& .MuiStack-root:active": {
+                  backgroundColor: "#f2f2f2",
+                },
+              }
+            : {
+                "& .MuiStack-root": {
+                  cursor: "pointer",
+                  transition: "all 0.1s",
+                  boxShadow: "2px 2px 5px 2px #8a8a8a",
+                },
+                "& .MuiStack-root:hover": {
+                  transform: "scale(1.06 , 1.06)",
+                },
+                "& .MuiStack-root:active": {
+                  backgroundColor: "black",
+                },
+              }
+        }
       >
         {cards?.map((e) => (
           <Stack
@@ -74,14 +90,17 @@ function Cards() {
             justifyContent={"space-between"}
             alignItems={"center"}
             gap={"12px"}
-            bgcolor={"#1C1C1E"}
+            bgcolor={theme === "light" ? "white" : "#1C1C1E"}
             borderRadius={"12px"}
-            padding={"7px"}
+            padding={"12px"}
             onClick={() => handleCardClick(e)}
           >
             <img src={e.img} alt="" style={{ width: "70px" }} />
             <Box direction={"column"}>
-              <Typography color="white" sx={{ userSelect: "none" }}>
+              <Typography
+                color={theme === "light" ? "black" : "white"}
+                sx={{ userSelect: "none" }}
+              >
                 {e.name}
               </Typography>
             </Box>

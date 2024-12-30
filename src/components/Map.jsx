@@ -1,11 +1,8 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useCardData } from "../utils/userStore";
 
 const Map = () => {
   const { cards, selectedMarker, selectedCard } = useCardData();
-
 
   return (
     <MapContainer
