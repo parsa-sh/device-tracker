@@ -3,6 +3,7 @@ body{
   padding: 0;
   max-height:100%;
   overflow: hidden;
+  transition:ease-in-out all 1s;
 }
 .sidebar-icon-container {
   width: 60px;
@@ -47,4 +48,41 @@ body{
 
 .leaflet-control-attribution.leaflet-control{
   visibility: hidden;
+}
+.sidebar-icon-container-light {
+  width: 60px;
+  gap: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
+  &:hover {
+    .sidebar-text-light {
+      visibility: visible;
+    }
+    .sidebar-icons-light {
+      background-color: #44546c;
+    }
+  }
+  &:active .sidebar-icons-light {
+    background-color: #6984ac;
+  }
+  .sidebar-text-light {
+    visibility: hidden;
+    color: black;
+    transition: ease-in-out 0.1s;
+    font-weight: 700;
+    user-select: none;
+  }
+  .sidebar-icons-light {
+    object-fit: cover;
+    color: black;
+    width: 60px;
+    padding: 7px;
+    transition: ease-in-out 0.1s;
+    border-radius: 12px;
+  }
 }
