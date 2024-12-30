@@ -20,3 +20,13 @@ export const useCardData = create((set) => ({
   setSelectedCard: (card) => set({ selectedCard: card }),
   setCards: (cards) => set({ cards }),
 }));
+
+export const useThemeStore = create((set) => ({
+  theme: sessionStorage.getItem("theme") || "light",
+  toggleTheme: () =>
+    set((state) => {
+      const newTheme = state.theme === "light" ? "dark" : "light";
+      sessionStorage.setItem("theme", newTheme);
+      return { theme: newTheme };
+    }),
+}));
