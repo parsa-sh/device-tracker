@@ -32,6 +32,7 @@ function Cards() {
       marginBottom={"12px"}
       marginTop={"12px"}
       maxHeight={"80%"}
+      width={"20%"}
       sx={{
         position: "absolute",
         zIndex: "1000",
@@ -43,8 +44,9 @@ function Cards() {
     >
       <Stack
         position={"relative"}
+        width={"70%"}
         top={"30px"}
-        left={"35px"}
+        left={"25px"}
         direction={"column"}
         gap={"12px"}
         height={"100%"}
@@ -81,9 +83,6 @@ function Cards() {
             <Box direction={"column"}>
               <Typography color="white" sx={{ userSelect: "none" }}>
                 {e.name}
-              </Typography>
-              <Typography color="white" sx={{ userSelect: "none" }}>
-                {e.text}
               </Typography>
             </Box>
           </Stack>
