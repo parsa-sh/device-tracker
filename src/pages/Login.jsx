@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { users } from "./../utils/users";
 import { useUserStore } from "../utils/userStore";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 function Login({ onLogin }) {
@@ -20,16 +20,24 @@ function Login({ onLogin }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const user = users.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (user) {
-      setLoggedInUser({ name: user.name, username, picture: user.picture });
-      setError("");
-      navigate("/home");
-    } else {
-      setError("Invalid username or password.");
+  const handleLogin = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/users", {
+        params: { username, password },
+      });
+      const user = res.data.find(
+        (u) => u.username === username && u.password === password
+      );
+      if (user) {
+        setLoggedInUser({ name: user.name, username, picture: user.picture });
+        setError("");
+        navigate("/home");
+      } else {
+        setError("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setError("An error occurred. Please try again.");
     }
   };
 
@@ -149,7 +157,7 @@ function Login({ onLogin }) {
               open={error}
               autoHideDuration={3000}
               onClose={handleClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
               <Alert
                 onClose={handleClose}
