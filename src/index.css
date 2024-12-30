@@ -1,8 +1,8 @@
 body{
   margin: 0;
   padding: 0;
+  max-height:100%;
   overflow: hidden;
-  /* max-height: ; */
 }
 .sidebar-icon-container {
   width: 60px;
@@ -42,5 +42,9 @@ body{
 }
 
 .leaflet-top.leaflet-left{
+  visibility: hidden;
+}
+
+.leaflet-control-attribution.leaflet-control{
   visibility: hidden;
 }
