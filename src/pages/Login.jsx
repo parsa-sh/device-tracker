@@ -61,7 +61,6 @@ function Login({ onLogin }) {
         sx={{ backgroundColor: "white", borderRadius: "24px" }}
         width={"90vw"}
         height={"80vh"}
-        alignItems={"center"}
         padding={"32px"}
         gap={"12px"}
       >
@@ -176,14 +175,15 @@ function Login({ onLogin }) {
           }}
           width={"100%"}
           height={"100%"}
-          paddingY={"54px"}
-          paddingX={"54px"}
+          paddingY={"50px"}
+          paddingX={"50px"}
+          alignContent={"center"}
         >
           <img
             src="src/assets/images/logo.jpg"
             alt="login-image"
             style={{
-              height: "100%",
+              height: "70%",
               maxWidth: "100%",
               borderRadius: "24px",
               padding: "50px",
