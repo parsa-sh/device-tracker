@@ -3,6 +3,7 @@ import Cards from "./../components/Cards";
 import { useUserStore } from "../utils/userStore";
 import { useEffect, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
+import CardSection from "../components/CardSection";
 
 function Home() {
   const loggedInUser = useUserStore((state) => state.loggedInUser);
@@ -22,6 +23,7 @@ function Home() {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Cards />
+      <CardSection />
       <Map />
       <Snackbar
         open={welcome}

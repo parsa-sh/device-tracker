@@ -12,9 +12,9 @@ import Drivers from "../pages/Drivers";
 function Layout() {
 
   return (
-    <Stack direction={"column"}>
+    <Stack direction={"column"} maxHeight={"100%"}>
       <Appbar/>
-      <Stack direction={"row-reverse"} width={"100%"}>
+      <Stack direction={"row-reverse"} width={"100%"} maxHeight={"100vh"}>
         <Sidebar />
         <Box width={"100%"} height={"100vh"}>
           <Routes>

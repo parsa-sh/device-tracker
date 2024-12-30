@@ -11,3 +11,12 @@ export const useUserStore = create((set) => ({
     sessionStorage.removeItem("loggedInUser");
   },
 }));
+
+export const useCardData = create((set) => ({
+  cards: [],
+  selectedCard: null,
+  selectedMarker: [],
+  setSelectedMarker: (selectedMarker) => set({ selectedMarker }),
+  setSelectedCard: (card) => set({ selectedCard: card }),
+  setCards: (cards) => set({ cards }),
+}));
