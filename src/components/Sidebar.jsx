@@ -1,41 +1,54 @@
 import { Box, Stack } from "@mui/material";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
+import { useThemeStore } from "../utils/userStore";
 
 function Sidebar() {
+  const { theme } = useThemeStore();
   const imageArray = [
     {
       id: "1",
-      src: "src/assets/Icons/home.png",
+      srcBlack: "src/assets/Icons/home.png",
+      srcWhite: "src/assets/Icons/home-black.png",
       alt: "home",
       text: "خانه",
       path: "/home",
     },
-    { id: "2", src: "src/assets/Icons/user.png", alt: "user", text: "کاربری",path:"/user" },
+    {
+      id: "2",
+      srcBlack: "src/assets/Icons/user.png",
+      srcWhite: "src/assets/Icons/user-black.png",
+      alt: "user",
+      text: "کاربری",
+      path: "/user",
+    },
     {
       id: "3",
-      src: "src/assets/Icons/truck.png",
+      srcBlack: "src/assets/Icons/truck.png",
+      srcWhite: "src/assets/Icons/truck-black.png",
       alt: "truck",
       text: "ماشین ها",
-      path:"/trucks"
+      path: "/trucks",
     },
     {
       id: "4",
-      src: "src/assets/Icons/wheel.png",
+      srcBlack: "src/assets/Icons/wheel.png",
+      srcWhite: "src/assets/Icons/wheel-black.png",
       alt: "driver",
       text: "راننده ها",
-      path:"/drivers"
-
+      path: "/drivers",
     },
     {
       id: "5",
-      src: "src/assets/Icons/device.png",
+      srcBlack: "src/assets/Icons/device.png",
+      srcWhite: "src/assets/Icons/device-black.png",
       alt: "devices",
       text: "دستگاه ها",
-      path:"/devices"
+      path: "/devices",
     },
     {
       id: "6",
-      src: "src/assets/Icons/setting.png",
+      srcBlack: "src/assets/Icons/setting.png",
+      srcWhite: "src/assets/Icons/setting-black.png",
       alt: "setting",
       text: "تنظیمات",
       path: "/setting",
@@ -46,7 +59,11 @@ function Sidebar() {
       display={"flex"}
       flexDirection={"column"}
       justifyContent={"center"}
-      sx={{ backgroundColor: "#1C1C1E"}}
+      sx={
+        theme === "light"
+          ? { backgroundColor: "white" }
+          : { backgroundColor: "#1C1C1E" }
+      }
       maxHeight={"90vh"}
       width={"110px"}
       borderLeft={"2px solid black"}
@@ -58,11 +75,30 @@ function Sidebar() {
         gap={"16px"}
       >
         {imageArray.map((e) => (
-          <div className="sidebar-icon-container" key={e.id}>
+          <div
+            className={
+              theme === "light"
+                ? "sidebar-icon-container-light"
+                : "sidebar-icon-container"
+            }
+            key={e.id}
+          >
             <Link to={e.path}>
-              <img className="sidebar-icons" src={e.src} alt={e.alt} />
+              <img
+                className={
+                  theme === "light" ? "sidebar-icons-light" : "sidebar-icons"
+                }
+                src={theme === "light" ? e.srcWhite : e.srcBlack}
+                alt={e.alt}
+              />
             </Link>
-            <div className="sidebar-text">{e.text}</div>
+            <div
+              className={
+                theme === "light" ? "sidebar-text-light" : "sidebar-text"
+              }
+            >
+              {e.text}
+            </div>
           </div>
         ))}
       </Stack>
