@@ -12,9 +12,11 @@ import { useUserStore } from "../utils/userStore";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useThemeStore } from "../utils/userStore";
 
 function Appbar() {
+  const { theme } = useThemeStore();
   const loggedInUser = useUserStore((state) => state.loggedInUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const navigate = useNavigate();
@@ -30,7 +32,16 @@ function Appbar() {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#1C1C1E" }} width={"100%"} height={"100px"} borderBottom={"2px solid black"}>
+    <Box
+      sx={
+        theme === "light"
+          ? { backgroundColor: "white" }
+          : { backgroundColor: "#1C1C1E" }
+      }
+      width={"100%"}
+      height={"100px"}
+      borderBottom={"2px solid black"}
+    >
       <Stack direction={"row-reverse"} height={"100%"}>
         <Stack
           width={"100%"}
@@ -48,20 +59,35 @@ function Appbar() {
               width: "65px",
               height: "60px",
               borderRadius: "12px",
-              border: "2px solid #ffffff78",
             }}
           />
           <Typography
-            sx={{ color: "white", fontWeight: "900", fontSize: "18px" }}
+            sx={
+              theme === "light"
+                ? { color: "black", fontWeight: "900", fontSize: "18px" }
+                : { color: "white", fontWeight: "900", fontSize: "18px" }
+            }
           >
             {loggedInUser.name}
           </Typography>
-          <Stack direction={"column"} position={"relative"} sx={{transition:"ease-in-out 1s"}}>
+          <Stack
+            direction={"column"}
+            position={"relative"}
+            sx={{ transition: "ease-in-out 1s" }}
+          >
             <IconButton color="info" onClick={handleOpen}>
               {open ? (
-                <ArrowDropUpIcon sx={{ color: "white" }} />
+                <ArrowDropUpIcon
+                  sx={
+                    theme === "light" ? { color: "black" } : { color: "white" }
+                  }
+                />
               ) : (
-                <ArrowDropDownIcon sx={{ color: "white" }} />
+                <ArrowDropDownIcon
+                  sx={
+                    theme === "light" ? { color: "black" } : { color: "white" }
+                  }
+                />
               )}
             </IconButton>
             {open ? (
@@ -72,13 +98,19 @@ function Appbar() {
                 top={"30px"}
                 right={"0px"}
                 gap={"12px"}
-                border={"0.5px solid grey"}
+                border={theme==="light"?"0.5px solid grey":"0.5px solid white"}
                 padding={"7px"}
                 borderRadius={"12px"}
-                bgcolor={"white"}
-                sx={{transition:"ease-in-out 1s"}}
+                bgcolor={theme==="light"?"white":"#1C1C1E"}
+                sx={{ transition: "ease-in-out 1s" }}
               >
-                <Button variant="contained" onClick={handleLogout} startIcon={<LogoutIcon/>}>logout</Button>
+                <Button
+                  variant="contained"
+                  onClick={handleLogout}
+                  startIcon={<LogoutIcon />}
+                >
+                  logout
+                </Button>
                 <Button variant="contained">test</Button>
                 <Button variant="contained">test</Button>
                 <Button variant="contained">test</Button>
@@ -106,17 +138,29 @@ function Appbar() {
             <InputBase
               placeholder="جستجو"
               dir="rtl"
-              sx={{
-                color: "white",
-                fontSize: "18px",
-                fontWeight: "600",
-                "& .MuiInputBase-input::placeholder": {
-                  color: "white",
-                  fontWeight: "700",
-                },
-              }}
+              sx={
+                theme === "light"
+                  ? {
+                      color: "black",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                      "& .MuiInputBase-input::placeholder": {
+                        color: "black",
+                        fontWeight: "700",
+                      },
+                    }
+                  : {
+                      color: "white",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                      "& .MuiInputBase-input::placeholder": {
+                        color: "white",
+                        fontWeight: "700",
+                      },
+                    }
+              }
             />
-            <SearchIcon sx={{ color: "white", fontSize: "32px" }} />
+            <SearchIcon sx={theme==="light"?{ color: "black", fontSize: "32px" }:{ color: "white", fontSize: "32px" }} />
           </Box>
         </Stack>
         <Stack
