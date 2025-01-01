@@ -22,7 +22,7 @@ function Login({ onLogin }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/users", {
+      const res = await axios.get("http://localhost:4000/users", {
         params: { username, password },
       });
       const user = res.data.find(
