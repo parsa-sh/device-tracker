@@ -4,19 +4,37 @@
       "username": "parsa",
       "password": "parsa",
       "name": "پارسا شاهسون",
-      "picture": "src/assets/images/parsa.jpg"
+      "picture": "src/assets/images/parsa.jpg",
+      "email":"parsa@parsa.com",
+      "companyCode":"14031",
+      "role":"admin"
     },
     {
       "username": "mahsa",
       "password": "mahsa",
       "name": " مهسا محمدی",
-      "picture": "src/assets/images/mahsa.jpg"
+      "picture": "src/assets/images/mahsa.jpg",
+      "email":"mahsa@mahsa.com",
+      "companyCode":"14032",
+      "role":"admin"
     },
     {
       "username": "zahra",
       "password": "zahra",
       "name": "زهرا ابراهیمی",
-      "picture": "src/assets/images/zahra.jpg"
+      "picture": "src/assets/images/zahra.jpg",
+      "email":"zahra@zahra.com",
+      "companyCode":"14033",
+      "role":"admin"
+    },
+    {
+      "username": "admin",
+      "password": "admin",
+      "name": "admin",
+      "picture": "",
+      "email":"admin@admin.com",
+      "companyCode":"1",
+      "role":"system"
     }
   ]
 }
