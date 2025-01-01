@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 export const useUserStore = create((set) => ({
+  users:[],
+  setUsers :(users)=>set({users}),
   loggedInUser: JSON.parse(sessionStorage.getItem("loggedInUser")) || null,
   setLoggedInUser: (user) => {
     set({ loggedInUser: user });
