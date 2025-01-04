@@ -1,9 +1,11 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Switch } from "@mui/material";
 import { Link } from "react-router";
 import { useThemeStore } from "../utils/userStore";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 function Sidebar() {
-  const { theme } = useThemeStore();
+  const { theme, toggleTheme } = useThemeStore();
   const imageArray = [
     {
       id: "1",
@@ -47,10 +49,10 @@ function Sidebar() {
     },
     {
       id: "6",
-      srcBlack: "src/assets/Icons/setting.png",
-      srcWhite: "src/assets/Icons/setting-black.png",
+      srcBlack: "src/assets/Icons/lock-light.png",
+      srcWhite: "src/assets/Icons/lock-black.png",
       alt: "setting",
-      text: "تنظیمات",
+      text: "قفل ها",
       path: "/setting",
     },
   ];
@@ -64,15 +66,16 @@ function Sidebar() {
           ? { backgroundColor: "white" }
           : { backgroundColor: "#1C1C1E" }
       }
-      maxHeight={"90vh"}
-      width={"110px"}
+      height={"90vh"}
+      minWidth={"120px"}
       borderLeft={"2px solid black"}
     >
       <Stack
         direction={"column"}
         justifyContent={"center"}
         alignItems={"center"}
-        gap={"16px"}
+        gap={"18px"}
+        marginBottom={'54px'}
       >
         {imageArray.map((e) => (
           <div
@@ -101,6 +104,21 @@ function Sidebar() {
             </div>
           </div>
         ))}
+        <Stack
+          direction={"row-reverse"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          position={"absolute"}
+          bottom={"12px"}
+          right={"0"}
+        >
+          <BedtimeIcon color="primary" />
+          <Switch
+            checked={theme === "dark" ? true : false}
+            onChange={toggleTheme}
+          />
+          <LightModeIcon color="warning" />
+        </Stack>
       </Stack>
     </Box>
   );
