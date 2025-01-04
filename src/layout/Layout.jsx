@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import { Box, Stack, ThemeProvider } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Home from "./../pages/Home";
 import Appbar from "./../components/Appbar";
 import Sidebar from "./../components/Sidebar";
