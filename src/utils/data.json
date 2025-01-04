@@ -420,6 +420,7 @@
   ],
   "users": [
     {
+      "id": 1,
       "username": "parsa",
       "password": "parsa",
       "name": "پارسا شاهسون",
@@ -429,15 +430,17 @@
       "role": "admin"
     },
     {
+      "id": 2,
       "username": "mahsa",
       "password": "mahsa",
       "name": " مهسا محمدی",
       "picture": "src/assets/images/mahsa.jpg",
       "email": "mahsa@mahsa.com",
       "companyCode": "14032",
-      "role": "admin"
+      "role": "user"
     },
     {
+      "id": 3,
       "username": "zahra",
       "password": "zahra",
       "name": "زهرا ابراهیمی",
@@ -445,47 +448,38 @@
       "email": "zahra@zahra.com",
       "companyCode": "14033",
       "role": "admin"
-    },
-    {
-      "username": "admin",
-      "password": "admin",
-      "name": "admin",
-      "picture": "",
-      "email": "admin@admin.com",
-      "companyCode": "1",
-      "role": "system"
     }
   ],
-  "locks":[
+  "locks": [
     {
-      "id":"1",
-      "last_device":"دستگاه 1",
-      "serial":"Lock001",
-      "status":"locked"
+      "id": "1",
+      "last_device": "دستگاه 1",
+      "serial": "Lock001",
+      "status": "locked"
     },
     {
-      "id":"2",
-      "last_device":"دستگاه 2",
-      "serial":"Lock002",
-      "status":"unlocked"
+      "id": "2",
+      "last_device": "دستگاه 2",
+      "serial": "Lock002",
+      "status": "unlocked"
     },
     {
-      "id":"3",
-      "last_device":"دستگاه 3",
-      "serial":"Lock003",
-      "status":"locked"
+      "id": "3",
+      "last_device": "دستگاه 3",
+      "serial": "Lock003",
+      "status": "locked"
     },
     {
-      "id":"4",
-      "last_device":"دستگاه 4",
-      "serial":"Lock004",
-      "status":"unlocked"
+      "id": "4",
+      "last_device": "دستگاه 4",
+      "serial": "Lock004",
+      "status": "unlocked"
     },
     {
-      "id":"5",
-      "last_device":"دستگاه 5",
-      "serial":"Lock005",
-      "status":"locked"
+      "id": "5",
+      "last_device": "دستگاه 5",
+      "serial": "Lock005",
+      "status": "locked"
     }
   ]
 }
