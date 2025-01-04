@@ -181,6 +181,7 @@ function Appbar() {
               height: "50px",
               borderRadius: "12px",
               border: "5px solid #44546D",
+              backgroundColor:"#44546D"
             }}
           />
         </Stack>
