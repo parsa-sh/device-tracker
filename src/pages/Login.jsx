@@ -22,14 +22,22 @@ function Login({ onLogin }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/users", {
+      const res = await axios.get("http://localhost:7000/users", {
         params: { username, password },
       });
       const user = res.data.find(
         (u) => u.username === username && u.password === password
       );
       if (user) {
-        setLoggedInUser({ name: user.name, username, picture: user.picture });
+        setLoggedInUser({
+          name: user.name,
+          username,
+          picture: user.picture,
+          email: user.email,
+          companyCode: user.companyCode,
+          role: user.role,
+          password : user.password
+        });
         setError("");
         navigate("/home");
       } else {
