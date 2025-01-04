@@ -7,7 +7,6 @@ body{
 }
 .sidebar-icon-container {
   width: 60px;
-  gap: 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,6 +31,7 @@ body{
     transition: ease-in-out 0.1s;
     font-weight: 700;
     user-select: none;
+    margin-top: -5px;
   }
   .sidebar-icons {
     object-fit: cover;
@@ -51,7 +51,6 @@ body{
 }
 .sidebar-icon-container-light {
   width: 60px;
-  gap: 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,7 +63,7 @@ body{
       visibility: visible;
     }
     .sidebar-icons-light {
-      background-color: #44546c;
+      background-color: #a2c7ff7e;
     }
   }
   &:active .sidebar-icons-light {
@@ -76,6 +75,8 @@ body{
     transition: ease-in-out 0.1s;
     font-weight: 700;
     user-select: none;
+    margin-top: -5px;
+
   }
   .sidebar-icons-light {
     object-fit: cover;
