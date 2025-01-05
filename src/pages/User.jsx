@@ -1,24 +1,39 @@
-import { Avatar, Box, Button, Chip, Stack, TextField } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Chip,
+  IconButton,
+  InputAdornment,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserEdit from "../components/UserEdit";
 import SearchIcon from "@mui/icons-material/Search";
 import { useThemeStore } from "../utils/userStore";
+import ClearIcon from "@mui/icons-material/Clear";
 
 function User() {
   const { theme } = useThemeStore();
   const [users, setUsers] = useState([]);
-  const [initialRow , setInitialRow] = useState([])
+  const [initialRow, setInitialRow] = useState([]);
   const [editPage, setEditPage] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchClear = () => {
+    setSearchQuery("");
+    setUsers(initialRow);
+  };
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     setSearchQuery(value);
 
-    if(value === ''){
-      setUsers(initialRow)
+    if (value === "") {
+      setUsers(initialRow);
       return;
     }
 
@@ -164,6 +179,21 @@ function User() {
                 label="جستجو"
                 value={searchQuery}
                 onChange={handleSearch}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleSearchClear}
+                        edge="start"
+                        style={{
+                          visibility: searchQuery === "" ? "hidden" : "visible",
+                        }}
+                      >
+                        <ClearIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
                 sx={
                   theme === "dark"
                     ? {
