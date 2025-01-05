@@ -1,19 +1,28 @@
-import { Avatar, Button, Chip, Stack } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Chip,
+  InputBase,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserEdit from "../components/UserEdit";
+import SearchIcon from "@mui/icons-material/Search";
 
 function User() {
   const [users, setUsers] = useState([]);
   const [editPage, setEditPage] = useState(false);
 
-  const handleEdit = ()=>{
-    setEditPage(true)
-  }
-  const handleEditClose = ()=>{
-    setEditPage(false)
-  }
+  const handleEdit = () => {
+    setEditPage(true);
+  };
+  const handleEditClose = () => {
+    setEditPage(false);
+  };
 
   const columns = [
     {
@@ -98,6 +107,49 @@ function User() {
         maxHeight={"100vh"}
       >
         <Stack maxWidth={"100vw"} maxHeight={"100vh"}>
+          <Stack
+            direction={"row"}
+            borderBottom={"1px solid #d6d6d6"}
+            padding={"12px"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            marginBottom={"18px"}
+            paddingBottom={"24px"}
+          >
+            <Button
+              sx={{ fontWeight: "700" }}
+              variant="contained"
+              disableElevation
+              color="secondary"
+            >
+              کاربر جدید +
+            </Button>
+            <Box
+              display={"flex"}
+              flexDirection={"row"}
+              alignItems={"center"}
+              gap={"12px"}
+            >
+              <SearchIcon />
+              <TextField
+                variant="standard"
+                dir="rtl"
+                color="secondary"
+                label="جستجو"
+                sx={{
+                  "& .MuiFormLabel-root.MuiInputLabel-root": {
+                    right: "0",
+                  },
+                  "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
+                    right: "-10px",
+                  },
+                  "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink": {
+                    right: "-10px",
+                  },
+                }}
+              />
+            </Box>
+          </Stack>
           <DataGrid
             rows={users}
             columns={columns}
