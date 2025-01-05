@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   IconButton,
-  Input,
   InputBase,
   Stack,
   Typography,
@@ -28,6 +27,7 @@ function UserEdit({ onClose }) {
       display={"flex"}
       justifyContent={"center"}
       alignItems={"center"}
+      zIndex={10000}
     >
       <Stack
         border={theme === "dark" ? "2px solid white" : "2px solid #2b2b2b"}
