@@ -2,13 +2,17 @@ import {
   Avatar,
   Box,
   Button,
+  IconButton,
+  Input,
+  InputBase,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useUserStore } from "../utils/userStore";
 import { useThemeStore } from "../utils/userStore";
+import EditIcon from "@mui/icons-material/Edit";
 
+// eslint-disable-next-line react/prop-types
 function UserEdit({ onClose }) {
   const loggedInUser = useUserStore((state) => state.loggedInUser);
   const { theme } = useThemeStore();
@@ -26,6 +30,7 @@ function UserEdit({ onClose }) {
       alignItems={"center"}
     >
       <Stack
+        border={theme === "dark" ? "2px solid white" : "2px solid #2b2b2b"}
         bgcolor={theme === "dark" ? "#1C1C1E" : "white"}
         height={"65%"}
         width={"40%"}
@@ -42,10 +47,38 @@ function UserEdit({ onClose }) {
           marginTop={"14px"}
           gap={"24px"}
         >
-          <Avatar
-            src={loggedInUser.picture}
-            sx={{ width: "120px", height: "120px" }}
-          />
+          <Box position={"relative"}>
+            <Avatar
+              src={loggedInUser.picture}
+              sx={{ width: "120px", height: "120px" }}
+            />
+            <input
+              type="file"
+              id="icon-button-file"
+              style={{ display: "none" }}
+              accept="image/*"
+            />
+            <label htmlFor="icon-button-file">
+              <IconButton
+                component="span"
+                size="small"
+                color="primary"
+                type="file"
+                sx={{
+                  position: "absolute",
+                  top: "90px",
+                  right: "10px",
+                  bgcolor: "#104a84",
+                  border: "2px solid #d1d1d1a8",
+                  "&:hover": {
+                    bgcolor: "#1976D2",
+                  },
+                }}
+              >
+                <EditIcon sx={{ color: "white" }} />
+              </IconButton>
+            </label>
+          </Box>
           <Stack
             justifyContent={"center"}
             alignItems={"center"}
@@ -75,23 +108,13 @@ function UserEdit({ onClose }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <TextField
-              size="small"
-              defaultValue={loggedInUser.name}
-              sx={theme==="dark"?{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "white",
-                },
-              }:{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "black",
-                },
-              }}
+            <InputBase
+              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              placeholder={loggedInUser.username}
+              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
-              نام و نام خانوادگی
+              نام کاربری
             </Typography>
           </Stack>
           <Stack
@@ -99,20 +122,10 @@ function UserEdit({ onClose }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <TextField
-              size="small"
-              defaultValue={loggedInUser.email}
-              sx={theme==="dark"?{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "white",
-                },
-              }:{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "black",
-                },
-              }}
+            <InputBase
+              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              placeholder={loggedInUser.email}
+              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               ایمیل
@@ -123,20 +136,10 @@ function UserEdit({ onClose }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <TextField
-              size="small"
-              defaultValue={loggedInUser.companyCode}
-              sx={theme==="dark"?{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "white",
-                },
-              }:{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "black",
-                },
-              }}
+            <InputBase
+              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              placeholder={loggedInUser.companyCode}
+              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               کد پرسنلی
@@ -147,21 +150,10 @@ function UserEdit({ onClose }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <TextField
-              size="small"
-              defaultValue={loggedInUser.password}
-              type="password"
-              sx={theme==="dark"?{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "white",
-                },
-              }:{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "black",
-                },
-              }}
+            <InputBase
+              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              placeholder={loggedInUser.password}
+              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               کلمه عبور
@@ -172,20 +164,10 @@ function UserEdit({ onClose }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <TextField
-              size="small"
-              type="password"
-              sx={theme==="dark"?{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "white",
-                },
-              }:{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
-                "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                  color: "black",
-                },
-              }}
+            <InputBase
+              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              placeholder="کلمه عبور جدید را وارد کنید"
+              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               کلمه عبور جدید
