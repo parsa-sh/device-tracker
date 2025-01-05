@@ -15,27 +15,28 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useThemeStore } from "../utils/userStore";
 import ClearIcon from "@mui/icons-material/Clear";
 import UserAdd from "../components/UserAdd";
+import { useUserStore } from "../utils/userStore";
 
 function User() {
   const { theme } = useThemeStore();
   const [users, setUsers] = useState([]);
   const [initialRow, setInitialRow] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [addPage , setAddPage] = useState(false)
-
+  const [addPage, setAddPage] = useState(false);
+  const loggedInUser = useUserStore((state) => state.loggedInUser);
 
   const handleSearchClear = () => {
     setSearchQuery("");
     setUsers(initialRow);
   };
 
-  const handleClose =()=>{
-    setAddPage(false)
-  }
+  const handleClose = () => {
+    setAddPage(false);
+  };
 
-  const handleOpen = ()=>{
-    setAddPage(true)
-  }
+  const handleOpen = () => {
+    setAddPage(true);
+  };
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
@@ -54,7 +55,6 @@ function User() {
 
     setUsers(filteredRows);
   };
-
 
   const columns = [
     {
@@ -111,7 +111,6 @@ function User() {
           <Button
             variant="contained"
             disableElevation
-            
             sx={{ borderRadius: "12px", fontWeight: "700" }}
           >
             ویرایش
@@ -123,8 +122,10 @@ function User() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(loggedInUser.id)
         const res = await axios.get("http://localhost:7000/users");
-        const userData = res.data.map((user) => ({
+        const filteredData = res.data.filter((user) => String(user.id) !== String(loggedInUser.id));
+        const userData = filteredData.map((user) => ({
           id: user.id,
           picture: user.picture,
           name: user.name,
@@ -140,7 +141,7 @@ function User() {
       }
     };
     fetchData();
-  }, []);
+  }, [loggedInUser]);
   return (
     <Box height={"100%"} bgcolor={theme === "light" ? "white" : "#1C1C1E"}>
       <Stack
@@ -293,7 +294,7 @@ function User() {
           />
         </Stack>
       </Stack>
-            {addPage && <UserAdd onClose={handleClose}/>}
+      {addPage && <UserAdd onClose={handleClose} />}
     </Box>
   );
 }

@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../utils/userStore";
 import axios from "axios";
+import { use } from "react";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 function Login({ onLogin }) {
@@ -36,7 +37,8 @@ function Login({ onLogin }) {
           email: user.email,
           companyCode: user.companyCode,
           role: user.role,
-          password : user.password
+          password : user.password,
+          id: user.id
         });
         setError("");
         navigate("/home");
