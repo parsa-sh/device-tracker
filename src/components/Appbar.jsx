@@ -14,6 +14,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useThemeStore } from "../utils/userStore";
+import UserEdit from "./UserEdit";
 
 function Appbar() {
   const { theme } = useThemeStore();
@@ -21,6 +22,7 @@ function Appbar() {
   const logoutUser = useUserStore((state) => state.logoutUser);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [editPage, setEditPage] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -29,6 +31,12 @@ function Appbar() {
   const handleLogout = () => {
     logoutUser();
     navigate("/login");
+  };
+  const handleEdit = () => {
+    setEditPage(true);
+  };
+  const handleEditClose = () => {
+    setEditPage(false);
   };
 
   return (
@@ -92,29 +100,29 @@ function Appbar() {
             </IconButton>
             {open ? (
               <Stack
+                width={"115px"}
                 direction={"column"}
                 position={"absolute"}
                 zIndex={"1000"}
                 top={"30px"}
                 right={"0px"}
                 gap={"12px"}
-                border={theme==="light"?"0.5px solid grey":"0.5px solid white"}
+                border={
+                  theme === "light" ? "0.5px solid grey" : "0.5px solid white"
+                }
                 padding={"7px"}
                 borderRadius={"12px"}
-                bgcolor={theme==="light"?"white":"#1C1C1E"}
+                bgcolor={theme === "light" ? "white" : "#1C1C1E"}
                 sx={{ transition: "ease-in-out 1s" }}
               >
+                <Button variant="contained" onClick={handleEdit}>حساب کاربری</Button>
                 <Button
                   variant="contained"
                   onClick={handleLogout}
                   startIcon={<LogoutIcon />}
                 >
-                  logout
+                  خروج
                 </Button>
-                <Button variant="contained">test</Button>
-                <Button variant="contained">test</Button>
-                <Button variant="contained">test</Button>
-                <Button variant="contained">test</Button>
               </Stack>
             ) : (
               ""
@@ -160,7 +168,13 @@ function Appbar() {
                     }
               }
             />
-            <SearchIcon sx={theme==="light"?{ color: "black", fontSize: "32px" }:{ color: "white", fontSize: "32px" }} />
+            <SearchIcon
+              sx={
+                theme === "light"
+                  ? { color: "black", fontSize: "32px" }
+                  : { color: "white", fontSize: "32px" }
+              }
+            />
           </Box>
         </Stack>
         <Stack
@@ -181,11 +195,12 @@ function Appbar() {
               height: "50px",
               borderRadius: "12px",
               border: "5px solid #44546D",
-              backgroundColor:"#44546D"
+              backgroundColor: "#44546D",
             }}
           />
         </Stack>
       </Stack>
+      {editPage && <UserEdit onClose={handleEditClose} />}
     </Box>
   );
 }
