@@ -11,22 +11,31 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserEdit from "../components/UserEdit";
 import SearchIcon from "@mui/icons-material/Search";
 import { useThemeStore } from "../utils/userStore";
 import ClearIcon from "@mui/icons-material/Clear";
+import UserAdd from "../components/UserAdd";
 
 function User() {
   const { theme } = useThemeStore();
   const [users, setUsers] = useState([]);
   const [initialRow, setInitialRow] = useState([]);
-  const [editPage, setEditPage] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [addPage , setAddPage] = useState(false)
+
 
   const handleSearchClear = () => {
     setSearchQuery("");
     setUsers(initialRow);
   };
+
+  const handleClose =()=>{
+    setAddPage(false)
+  }
+
+  const handleOpen = ()=>{
+    setAddPage(true)
+  }
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
@@ -46,12 +55,6 @@ function User() {
     setUsers(filteredRows);
   };
 
-  const handleEdit = () => {
-    setEditPage(true);
-  };
-  const handleEditClose = () => {
-    setEditPage(false);
-  };
 
   const columns = [
     {
@@ -108,8 +111,8 @@ function User() {
           <Button
             variant="contained"
             disableElevation
+            
             sx={{ borderRadius: "12px", fontWeight: "700" }}
-            onClick={handleEdit}
           >
             ویرایش
           </Button>
@@ -161,6 +164,7 @@ function User() {
               sx={{ fontWeight: "700" }}
               variant="contained"
               disableElevation
+              onClick={handleOpen}
             >
               کاربر جدید +
             </Button>
@@ -289,7 +293,7 @@ function User() {
           />
         </Stack>
       </Stack>
-      {editPage && <UserEdit onClose={handleEditClose} />}
+            {addPage && <UserAdd onClose={handleClose}/>}
     </Box>
   );
 }
