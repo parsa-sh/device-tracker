@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Avatar, Box, Button, Chip, Stack, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -16,7 +9,27 @@ import { useThemeStore } from "../utils/userStore";
 function User() {
   const { theme } = useThemeStore();
   const [users, setUsers] = useState([]);
+  const [initialRow , setInitialRow] = useState([])
   const [editPage, setEditPage] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchQuery(value);
+
+    if(value === ''){
+      setUsers(initialRow)
+      return;
+    }
+
+    const filteredRows = users.filter(
+      (row) =>
+        row.name.toLowerCase().includes(value) ||
+        row.companyCode.toString().includes(value)
+    );
+
+    setUsers(filteredRows);
+  };
 
   const handleEdit = () => {
     setEditPage(true);
@@ -30,28 +43,34 @@ function User() {
       field: "companyCode",
       headerName: "شماره پرسنلی",
       width: 200,
-      headerClassName: 'grid--header',
-      cellClassName: 'grid--cell',
+      headerClassName: "grid--header",
+      cellClassName: "grid--cell",
     },
     {
       field: "picture",
       headerName: "تصویر کاربر",
-      cellClassName: 'grid--cell',
+      cellClassName: "grid--cell",
       width: 300,
-      headerClassName: 'grid--header',
+      headerClassName: "grid--header",
       renderCell: (params) => (
         <Stack width={"100%"} height={"100%"} justifyContent={"center"}>
           <Avatar sx={{ width: "120px", height: "120px" }} src={params.value} />
         </Stack>
       ),
     },
-    { field: "name", headerName: "نام و نام خانوادگی", width: 300,headerClassName: 'grid--header',cellClassName: 'grid--cell' },
+    {
+      field: "name",
+      headerName: "نام و نام خانوادگی",
+      width: 300,
+      headerClassName: "grid--header",
+      cellClassName: "grid--cell",
+    },
     {
       field: "role",
       headerName: "نقش کاربری",
       flex: 1,
-      cellClassName: 'grid--cell',
-      headerClassName: 'grid--header',
+      cellClassName: "grid--cell",
+      headerClassName: "grid--header",
       renderCell: (params) => (
         <Stack
           width={"100%"}
@@ -97,6 +116,7 @@ function User() {
           password: user.password,
         }));
         setUsers(userData);
+        setInitialRow(userData);
       } catch (error) {
         alert(error);
       }
@@ -135,11 +155,15 @@ function User() {
               alignItems={"center"}
               gap={"12px"}
             >
-              <SearchIcon sx={theme==="dark"?{color:"white"}:{color:"black"}} />
+              <SearchIcon
+                sx={theme === "dark" ? { color: "white" } : { color: "black" }}
+              />
               <TextField
                 variant="standard"
                 dir="rtl"
                 label="جستجو"
+                value={searchQuery}
+                onChange={handleSearch}
                 sx={
                   theme === "dark"
                     ? {
@@ -194,40 +218,44 @@ function User() {
             disableColumnResize={true}
             disableAutosize={true}
             rowHeight={150}
-            sx={theme==="dark"?{
-              borderRadius: "12px",
-              "& .MuiDataGrid-columnHeaders": {
-                textAlign: "right",
-                position: "sticky",
-                top: 0,
-                zIndex: 1000,
-              },
-              "& .MuiDataGrid-cell": {
-                textAlign: "right",
-              },
-              "& .grid--header": {
-                backgroundColor:"#1C1C1E",
-                color:"white"
-              },
-              "& .grid--cell": {
-                color:"white"
-              },
-            }:{
-              borderRadius: "12px",
-              "& .MuiDataGrid-columnHeaders": {
-                textAlign: "right",
-                position: "sticky",
-                top: 0,
-                zIndex: 1000,
-              },
-              "& .MuiDataGrid-cell": {
-                textAlign: "right",
-              },
-              "& .grid--header": {
-                backgroundColor:"white",
-                color:"black"
-              },
-            }}
+            sx={
+              theme === "dark"
+                ? {
+                    borderRadius: "12px",
+                    "& .MuiDataGrid-columnHeaders": {
+                      textAlign: "right",
+                      position: "sticky",
+                      top: 0,
+                      zIndex: 1000,
+                    },
+                    "& .MuiDataGrid-cell": {
+                      textAlign: "right",
+                    },
+                    "& .grid--header": {
+                      backgroundColor: "#1C1C1E",
+                      color: "white",
+                    },
+                    "& .grid--cell": {
+                      color: "white",
+                    },
+                  }
+                : {
+                    borderRadius: "12px",
+                    "& .MuiDataGrid-columnHeaders": {
+                      textAlign: "right",
+                      position: "sticky",
+                      top: 0,
+                      zIndex: 1000,
+                    },
+                    "& .MuiDataGrid-cell": {
+                      textAlign: "right",
+                    },
+                    "& .grid--header": {
+                      backgroundColor: "white",
+                      color: "black",
+                    },
+                  }
+            }
           />
         </Stack>
       </Stack>
