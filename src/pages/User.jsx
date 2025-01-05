@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Chip,
-  InputBase,
   Stack,
   TextField,
 } from "@mui/material";
@@ -12,8 +11,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserEdit from "../components/UserEdit";
 import SearchIcon from "@mui/icons-material/Search";
+import { useThemeStore } from "../utils/userStore";
 
 function User() {
+  const { theme } = useThemeStore();
   const [users, setUsers] = useState([]);
   const [editPage, setEditPage] = useState(false);
 
@@ -29,22 +30,28 @@ function User() {
       field: "companyCode",
       headerName: "شماره پرسنلی",
       width: 200,
+      headerClassName: 'grid--header',
+      cellClassName: 'grid--cell',
     },
     {
       field: "picture",
-      HeaderName: "تصویر کاربر",
+      headerName: "تصویر کاربر",
+      cellClassName: 'grid--cell',
       width: 300,
+      headerClassName: 'grid--header',
       renderCell: (params) => (
         <Stack width={"100%"} height={"100%"} justifyContent={"center"}>
           <Avatar sx={{ width: "120px", height: "120px" }} src={params.value} />
         </Stack>
       ),
     },
-    { field: "name", headerName: "نام و نام خانوادگی", width: 300 },
+    { field: "name", headerName: "نام و نام خانوادگی", width: 300,headerClassName: 'grid--header',cellClassName: 'grid--cell' },
     {
       field: "role",
       headerName: "نقش کاربری",
       flex: 1,
+      cellClassName: 'grid--cell',
+      headerClassName: 'grid--header',
       renderCell: (params) => (
         <Stack
           width={"100%"}
@@ -65,7 +72,6 @@ function User() {
             label={params.value}
           />
           <Button
-            color="secondary"
             variant="contained"
             disableElevation
             sx={{ borderRadius: "12px", fontWeight: "700" }}
@@ -98,18 +104,18 @@ function User() {
     fetchData();
   }, []);
   return (
-    <>
+    <Box height={"100%"} bgcolor={theme === "light" ? "white" : "#1C1C1E"}>
       <Stack
         sx={{ direction: "rtl" }}
         overflow={"hidden"}
         justifyContent={"center"}
         padding={"12px"}
         maxHeight={"100vh"}
+        bgcolor={theme === "light" ? "white" : "#1C1C1E"}
       >
         <Stack maxWidth={"100vw"} maxHeight={"100vh"}>
           <Stack
             direction={"row"}
-            borderBottom={"1px solid #d6d6d6"}
             padding={"12px"}
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -120,7 +126,6 @@ function User() {
               sx={{ fontWeight: "700" }}
               variant="contained"
               disableElevation
-              color="secondary"
             >
               کاربر جدید +
             </Button>
@@ -130,23 +135,53 @@ function User() {
               alignItems={"center"}
               gap={"12px"}
             >
-              <SearchIcon />
+              <SearchIcon sx={theme==="dark"?{color:"white"}:{color:"black"}} />
               <TextField
                 variant="standard"
                 dir="rtl"
-                color="secondary"
                 label="جستجو"
-                sx={{
-                  "& .MuiFormLabel-root.MuiInputLabel-root": {
-                    right: "0",
-                  },
-                  "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
-                    right: "-10px",
-                  },
-                  "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink": {
-                    right: "-10px",
-                  },
-                }}
+                sx={
+                  theme === "dark"
+                    ? {
+                        "& .MuiInputBase-input.MuiInput-input": {
+                          color: "white",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root": {
+                          right: "0",
+                          color: "white",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
+                          right: "-10px",
+                          color: "white",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink":
+                          {
+                            right: "-10px",
+                            color: "white",
+                          },
+                        "& .MuiInputBase-root.MuiInput-root::after": {
+                          borderBottom: "2px solid white",
+                        },
+                      }
+                    : {
+                        "& .MuiInputBase-input.MuiInput-input": {
+                          color: "black",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root": {
+                          right: "0",
+                          color: "black",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
+                          right: "-10px",
+                          color: "black",
+                        },
+                        "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink":
+                          {
+                            right: "-10px",
+                            color: "black",
+                          },
+                      }
+                }
               />
             </Box>
           </Stack>
@@ -159,7 +194,7 @@ function User() {
             disableColumnResize={true}
             disableAutosize={true}
             rowHeight={150}
-            sx={{
+            sx={theme==="dark"?{
               borderRadius: "12px",
               "& .MuiDataGrid-columnHeaders": {
                 textAlign: "right",
@@ -170,12 +205,34 @@ function User() {
               "& .MuiDataGrid-cell": {
                 textAlign: "right",
               },
+              "& .grid--header": {
+                backgroundColor:"#1C1C1E",
+                color:"white"
+              },
+              "& .grid--cell": {
+                color:"white"
+              },
+            }:{
+              borderRadius: "12px",
+              "& .MuiDataGrid-columnHeaders": {
+                textAlign: "right",
+                position: "sticky",
+                top: 0,
+                zIndex: 1000,
+              },
+              "& .MuiDataGrid-cell": {
+                textAlign: "right",
+              },
+              "& .grid--header": {
+                backgroundColor:"white",
+                color:"black"
+              },
             }}
           />
         </Stack>
       </Stack>
       {editPage && <UserEdit onClose={handleEditClose} />}
-    </>
+    </Box>
   );
 }
 
