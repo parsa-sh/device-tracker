@@ -110,7 +110,7 @@ function UserEdit({ onClose }) {
           >
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder={loggedInUser.username}
+              defaultValue={loggedInUser.username}
               dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
@@ -124,7 +124,7 @@ function UserEdit({ onClose }) {
           >
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder={loggedInUser.email}
+              defaultValue={loggedInUser.email}
               dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
@@ -138,7 +138,7 @@ function UserEdit({ onClose }) {
           >
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder={loggedInUser.companyCode}
+              defaultValue={loggedInUser.companyCode}
               dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
@@ -152,7 +152,8 @@ function UserEdit({ onClose }) {
           >
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder={loggedInUser.password}
+              defaultValue={loggedInUser.password}
+              type="password"
               dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
@@ -166,7 +167,7 @@ function UserEdit({ onClose }) {
           >
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder="کلمه عبور جدید را وارد کنید"
+              placeholder="8 رقم و ترکیبی از اعداد و حروف"
               dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
