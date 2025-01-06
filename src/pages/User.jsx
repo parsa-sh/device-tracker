@@ -442,7 +442,7 @@ function User() {
                 alignItems={"center"}
               >
                 <InputBase
-                value={selectedUser.password}
+                  value={selectedUser.password}
                   type="password"
                   sx={
                     theme === "dark" ? { color: "white" } : { color: "black" }
