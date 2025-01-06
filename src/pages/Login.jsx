@@ -7,10 +7,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../utils/userStore";
-import axios from "axios";
+import api from "../utils/api";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 function Login({ onLogin }) {
@@ -21,26 +21,30 @@ function Login({ onLogin }) {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    const url = "/authentication/login/";
+    const data = { username: username, password: password };
+    const headers = {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFTOKEN":
+        "ik3R0ILRns6Vdsd0ZZi7PxLWUgHyRjRvYxS2FE8JKQxjZwWVYAaKgKTGDOSmg4vu",
+    };
     try {
-      const res = await axios.get("http://localhost:7000/users", {
-        params: { username, password },
-      });
-      const user = res.data.find(
-        (u) => u.username === username && u.password === password
-      );
-      if (user) {
+      const res = await api.post(url, data, { headers });
+      const { access, refresh, ...user } = res.data;
+      if (access && refresh) {
+        localStorage.setItem("access", access);
+        localStorage.setItem("refresh", refresh);
         setLoggedInUser({
-          name: user.name,
-          username,
-          picture: user.picture,
+          username: user.username,
+          pic: user.profile_image,
           email: user.email,
-          companyCode: user.companyCode,
           role: user.role,
-          password : user.password,
-          id: user.id
+          id: user.id,
         });
         setError("");
         navigate("/home");
+        refreshTokenAutomatically();
       } else {
         setError("Invalid username or password.");
       }
@@ -49,6 +53,47 @@ function Login({ onLogin }) {
       setError("An error occurred. Please try again.");
     }
   };
+
+  const refreshTokenAutomatically = () => {
+    const intervalId = setInterval(async () => {
+      const refreshToken = localStorage.getItem("refresh");
+
+      if (refreshToken) {
+        try {
+          const response = await api.post("/authentication/refresh/", {
+            refresh: refreshToken,
+          });
+          const { access } = response.data;
+
+          if (access) {
+            localStorage.setItem("access", access);
+            console.log("Token refreshed");
+          } else {
+            console.error("No access token received");
+          }
+        } catch (error) {
+          console.error("Error refreshing token:", error);
+          localStorage.removeItem("access");
+          localStorage.removeItem("refresh");
+          window.location.href = "/login"; 
+        }
+      } else {
+        console.error("No refresh token available");
+      }
+    }, 1800000);
+
+    return intervalId;
+  };
+
+  useEffect(() => {
+    let intervalId;
+
+    if (localStorage.getItem("access") && localStorage.getItem("refresh")) {
+      intervalId = refreshTokenAutomatically();
+    }
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
