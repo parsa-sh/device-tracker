@@ -49,7 +49,7 @@ function UserEdit({ onClose }) {
         >
           <Box position={"relative"}>
             <Avatar
-              src={loggedInUser.picture}
+              src={`http://192.168.88.17:8000${loggedInUser.pic}`}
               sx={{ width: "120px", height: "120px" }}
             />
             <input

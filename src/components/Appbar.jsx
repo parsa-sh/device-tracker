@@ -61,7 +61,7 @@ function Appbar() {
           gap={"12px"}
         >
           <img
-            src={loggedInUser.picture}
+            src={`http://192.168.88.17:8000${loggedInUser.pic}`}
             alt="user-pic"
             style={{
               width: "65px",
@@ -115,7 +115,9 @@ function Appbar() {
                 bgcolor={theme === "light" ? "white" : "#1C1C1E"}
                 sx={{ transition: "ease-in-out 1s" }}
               >
-                <Button variant="contained" onClick={handleEdit}>حساب کاربری</Button>
+                <Button variant="contained" onClick={handleEdit}>
+                  حساب کاربری
+                </Button>
                 <Button
                   variant="contained"
                   onClick={handleLogout}

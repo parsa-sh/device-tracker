@@ -15,13 +15,13 @@ const Map = () => {
 
       {selectedCard
         ? selectedMarker?.map((e) => (
-            <Marker key={e.id} position={[e.lang, e.long]}>
-              <Popup>{e.name}</Popup>
+            <Marker key={e.id} position={[e.long, e.lat]}>
+              <Popup>{e.company}</Popup>
             </Marker>
           ))
         : cards?.map((e) => (
-            <Marker key={e.id} position={[e.lang, e.long]}>
-              <Popup>{e.name}</Popup>
+            <Marker key={e.id} position={[e.long, e.lat]}>
+              <Popup>{e.company}</Popup>
             </Marker>
           ))}
     </MapContainer>

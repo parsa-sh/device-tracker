@@ -30,18 +30,20 @@ function CardSection() {
           sx={{ transform: "translate(-50%)" }}
         >
           <img
-            src={selectedCard.img}
+            src="src/assets/images/device.png"
             alt="device-image"
             style={{ width: "80px", height: "80px" }}
           />
           <Stack
             direction={"column"}
-            alignItems={"flex-end"}
+            alignItems={"flex-start"}
             justifyContent={"space-between"}
             color={theme==="light"?"black":"white"}
           >
-            <Typography>{selectedCard.name}</Typography>
-            <Typography>{selectedCard.text}</Typography>
+            <Typography>Company : {selectedCard.company}</Typography>
+            <Typography>IMEI : {selectedCard.imei}</Typography>
+            <Typography>Type : {selectedCard.type}</Typography>
+            <Typography>IsActive : {selectedCard.is_active===true ?"true":"false"}</Typography>
           </Stack>
             <IconButton
               color="info"

@@ -24,7 +24,7 @@ function Login({ onLogin }) {
     const url = "/authentication/login/";
     const data = { username: username, password: password };
     const headers = {
-      accept: "application/json",
+      "accept": "application/json",
       "Content-Type": "application/json",
       "X-CSRFTOKEN":
         "ik3R0ILRns6Vdsd0ZZi7PxLWUgHyRjRvYxS2FE8JKQxjZwWVYAaKgKTGDOSmg4vu",
@@ -37,10 +37,11 @@ function Login({ onLogin }) {
         localStorage.setItem("refresh", refresh);
         setLoggedInUser({
           username: user.username,
-          pic: user.profile_image,
+          pic:user.profile_image,
           email: user.email,
           role: user.role,
           id: user.id,
+          name : user.name
         });
         setError("");
         navigate("/home");
