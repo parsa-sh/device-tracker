@@ -13,11 +13,11 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useUserStore } from "../utils/userStore";
 import { useThemeStore } from "../utils/userStore";
 import ClearIcon from "@mui/icons-material/Clear";
 import UserAdd from "../components/UserAdd";
 import EditIcon from "@mui/icons-material/Edit";
-import { useUserStore } from "../utils/userStore";
 
 function User() {
   const { theme } = useThemeStore();
