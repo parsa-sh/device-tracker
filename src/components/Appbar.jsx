@@ -100,7 +100,7 @@ function Appbar() {
             </IconButton>
             {open ? (
               <Stack
-                width={"115px"}
+                width={"130px"}
                 direction={"column"}
                 position={"absolute"}
                 zIndex={"1000"}
@@ -116,7 +116,7 @@ function Appbar() {
                 sx={{ transition: "ease-in-out 1s" }}
               >
                 <Button variant="contained" onClick={handleEdit}>
-                  حساب کاربری
+                  تنظیمات کاربری
                 </Button>
                 <Button
                   variant="contained"
