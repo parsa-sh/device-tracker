@@ -13,9 +13,32 @@ function Cards() {
   };
 
   const apiGet = async () => {
+    const headers = {
+      "accept": "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFTOKEN":
+        "ZWX49Bod8s0CgAIdvvE2qwDeJCo7fC1lF9MfOxL5vQr02Er8u6wFRJLYsazVEnFk",
+    };
     try {
-      const res = await axios.get("http://localhost:7000/devices");
-      setCards(res?.data);
+      const res = await axios.get(
+        "http://192.168.88.17:8000/api/devices/",
+        {headers}
+      );
+      const processedCards = res?.data.map((item) => {
+        if (item.last_location) {
+          const match = item.last_location.match(
+            /POINT\s\(([-\d.]+)\s([-\d.]+)\)/
+          );
+          if (match) {
+            const long = parseFloat(match[1]);
+            const lat = parseFloat(match[2]);
+            return { ...item, long, lat };
+          }
+        }
+        return item;
+      });
+      setCards(processedCards);
+      console.log(processedCards);
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +108,7 @@ function Cards() {
         {cards?.map((e) => (
           <Stack
             key={e.id}
-            width={"80%"}
+            width={"100%"}
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -95,13 +118,19 @@ function Cards() {
             padding={"12px"}
             onClick={() => handleCardClick(e)}
           >
-            <img src={e.img} alt="" style={{ width: "70px" }} />
-            <Box direction={"column"}>
+            <img src="src/assets/images/device.png" alt="" style={{ width: "70px" }} />
+            <Box display={"flex"} direction={"row"} gap={"18px"}>
               <Typography
                 color={theme === "light" ? "black" : "white"}
                 sx={{ userSelect: "none" }}
               >
-                {e.name}
+                {e.id}
+              </Typography>
+              <Typography
+                color={theme === "light" ? "black" : "white"}
+                sx={{ userSelect: "none" }}
+              >
+                {e.company}
               </Typography>
             </Box>
           </Stack>
