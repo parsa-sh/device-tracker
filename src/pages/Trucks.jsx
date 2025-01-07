@@ -5,15 +5,16 @@ import axios from "axios";
 
 function Trucks() {
   const [row, setRow] = useState([]);
+  const [rowCount, setRowCount] = useState(0);
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 5,
+  });
   const [loading, setLoading] = useState(true);
   const columns = [
-    { field: "car_id", headerName: "شناسه" ,width:100},
-    { field: "license_plate", headerName: "شماره پلاک", width: 250 },
+    { field: "id", headerName: "شناسه", width: 100 },
+    { field: "licensePlate", headerName: "شماره پلاک", width: 250 },
     { field: "model", headerName: "مدل ماشین", width: 250 },
-    { field: "driver_id", headerName: "شناسه راننده", width: 110 },
-    { field: "driver_name", headerName: "نام راننده", width: 150 },
-    { field: "device_id", headerName: "شناسه دستگاه", width: 150 },
-    { field: "imei", headerName: "شناسه بین المللی", width: 250 },
     {
       field: "is_active",
       headerName: "فعال",
@@ -48,35 +49,45 @@ function Trucks() {
                 }
           }
         >
+          {" "}
           {params.value ? "بله" : "خیر"}
         </div>
       ),
     },
   ];
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:7000/trucks");
-        const formattedRows = response.data.map((r) => ({
-          id: r.car_id,
-          car_id: r.car_id,
+
+  const fetchData = async (page) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`http://192.168.88.17:8000/api/cars/`, {
+        params: { page: page + 1 },
+      });
+      const { results, count } = response.data;
+      setRow(
+        results.map((r) => ({
+          id: r.id,
           model: r.model,
-          license_plate: r.license_plate,
-          driver_id: r.driver_id,
-          driver_name: r.driver_name,
-          device_id: r.device_id,
-          imei: r.imei,
+          licensePlate: r.license_plate,
           is_active: r.is_active,
-        }));
-        setRow(formattedRows);
-      } catch (error) {
-        console.log("error fetching driver data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+        }))
+      );
+      setRowCount(count);
+    } catch (error) {
+      console.log("error fetching driver data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const { page, pageSize } = paginationModel;
+    fetchData(page, pageSize);
+  }, [paginationModel]);
+
+  const handlePaginationChange = (model) => {
+    setPaginationModel(model);
+  };
+
   return (
     <Stack
       sx={{ direction: "rtl" }}
@@ -87,7 +98,9 @@ function Trucks() {
     >
       <Stack maxWidth={"100vw"} maxHeight={"100vh"}>
         <DataGrid
+          pagination
           rows={row}
+          rowCount={rowCount}
           columns={columns}
           loading={loading}
           disableSelectionOnClick
@@ -95,6 +108,9 @@ function Trucks() {
           disableColumnMenu={true}
           disableColumnResize={true}
           disableAutosize={true}
+          paginationMode="server"
+          paginationModel={paginationModel}
+          onPaginationModelChange={handlePaginationChange}
           sx={{
             borderRadius: "12px",
             "& .MuiDataGrid-columnHeaders": {
@@ -106,6 +122,13 @@ function Trucks() {
             "& .MuiDataGrid-cell": {
               textAlign: "right",
             },
+            "& .MuiTablePagination-displayedRows":{
+              visibility:"hidden"
+            },
+            "& .MuiTablePagination-actions":{
+              display:"flex",
+              flexDirection:"row-reverse"
+            }
           }}
         />
       </Stack>
