@@ -241,7 +241,9 @@ function Setting() {
           />
         </Stack>
       </Stack>
-      {popup && <LocksPopup popup={popup} history={history} handleClose={handleClose}/>}
+      {popup && (
+        <LocksPopup popup={popup} history={history} handleClose={handleClose} />
+      )}
     </Box>
   );
 }
