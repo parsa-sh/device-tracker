@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useThemeStore } from "../utils/userStore";
 import { Button } from "@mui/material";
 
