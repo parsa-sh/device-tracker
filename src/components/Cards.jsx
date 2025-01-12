@@ -38,7 +38,6 @@ function Cards() {
         return item;
       });
       setCards(processedCards);
-      console.log(processedCards);
     } catch (error) {
       console.log(error);
     }
