@@ -18,7 +18,7 @@ function RoleError() {
       }
     >
       <Typography
-        fontSize={"68px"}
+        fontSize={{xs:"44px",sm:"68px"}}
         color={theme === "light" ? "black" : "white"}
       >
         Access Denied !
