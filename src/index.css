@@ -1,9 +1,9 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  max-height:100%;
+  max-height: 100%;
   overflow: hidden;
-  transition:ease-in-out all 1s;
+  transition: ease-in-out all 1s;
 }
 .sidebar-icon-container {
   width: 60px;
@@ -30,7 +30,7 @@ body{
     color: white;
     transition: ease-in-out 0.1s;
     user-select: none;
-    font-size:12px;
+    font-size: 12px;
     font-weight: 700;
     margin-top: -5px;
   }
@@ -43,11 +43,11 @@ body{
   }
 }
 
-.leaflet-top.leaflet-left{
+.leaflet-top.leaflet-left {
   visibility: hidden;
 }
 
-.leaflet-control-attribution.leaflet-control{
+.leaflet-control-attribution.leaflet-control {
   visibility: hidden;
 }
 .sidebar-icon-container-light {
@@ -76,9 +76,8 @@ body{
     transition: ease-in-out 0.1s;
     user-select: none;
     margin-top: -5px;
-    font-size:12px;
+    font-size: 12px;
     font-weight: 700;
-
   }
   .sidebar-icons-light {
     object-fit: cover;
@@ -88,4 +87,24 @@ body{
     transition: ease-in-out 0.1s;
     border-radius: 12px;
   }
+}
+
+.sidebar-icons.active {
+  background-color: #44546d;
+}
+
+.sidebar-text.active {
+  font-weight: bold;
+  color: white;
+  visibility: visible;
+}
+
+.sidebar-icons-light.active {
+  background-color: #a2c7ff7e;
+}
+
+.sidebar-text-light.active {
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  visibility: visible;
 }

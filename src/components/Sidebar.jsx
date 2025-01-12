@@ -1,11 +1,12 @@
 import { Box, Stack, Switch } from "@mui/material";
-import { Link } from "react-router";
+import { Link , useLocation } from "react-router";
 import { useThemeStore } from "../utils/userStore";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
 function Sidebar() {
   const { theme, toggleTheme } = useThemeStore();
+  const location = useLocation();
   const imageArray = [
     {
       id: "1",
@@ -79,17 +80,27 @@ function Sidebar() {
       >
         {imageArray.map((e) => (
           <div
-            className={
-              theme === "light"
-                ? "sidebar-icon-container-light"
-                : "sidebar-icon-container"
-            }
+          className={
+            theme === "light"
+              ? location.pathname === e.path
+                ? "sidebar-icon-container-light active"
+                : "sidebar-icon-container-light"
+              : location.pathname === e.path
+              ? "sidebar-icon-container active"
+              : "sidebar-icon-container"
+          }
             key={e.id}
           >
             <Link to={e.path}>
               <img
                 className={
-                  theme === "light" ? "sidebar-icons-light" : "sidebar-icons"
+                  theme === "light"
+                    ? location.pathname === e.path
+                      ? "sidebar-icons-light active"
+                      : "sidebar-icons-light"
+                    : location.pathname === e.path
+                    ? "sidebar-icons active"
+                    : "sidebar-icons"
                 }
                 src={theme === "light" ? e.srcWhite : e.srcBlack}
                 alt={e.alt}
@@ -97,7 +108,13 @@ function Sidebar() {
             </Link>
             <div
               className={
-                theme === "light" ? "sidebar-text-light" : "sidebar-text"
+                theme === "light"
+                  ? location.pathname === e.path
+                    ? "sidebar-text-light active"
+                    : "sidebar-text-light"
+                  : location.pathname === e.path
+                  ? "sidebar-text active"
+                  : "sidebar-text"
               }
             >
               {e.text}
