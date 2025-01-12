@@ -71,7 +71,7 @@ function Sidebar() {
           : { backgroundColor: "#1C1C1E" }
       }
       height={{ xs: "12%", sm: "100Vh" }}
-      zIndex={{ xs: "100000", sm: "0" }}
+      zIndex={{ xs: "1000", sm: "0" }}
       width={{ xs: "100vw", sm: "85px" }}
       borderLeft={{ sm: "2px solid black" }}
       borderTop={{ xs: "2px solid black", sm: "none" }}

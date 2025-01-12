@@ -113,7 +113,7 @@ function Appbar() {
                 position={"absolute"}
                 zIndex={"1000"}
                 top={"30px"}
-                right={{xs:"",sm:"0px"}}
+                right={{xs:"-70px",sm:"0px"}}
                 gap={"12px"}
                 border={
                   theme === "light" ? "0.5px solid grey" : "0.5px solid white"

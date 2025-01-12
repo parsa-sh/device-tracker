@@ -27,11 +27,11 @@ function Home() {
       <Map />
       <Snackbar
         open={welcome}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical:"top" , horizontal: "left" }}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width:{xs:"60%",sm:"100%"} , marginTop:"65px" }}>
           خوش آمدید , {loggedInUser?.name}
         </Alert>
       </Snackbar>
