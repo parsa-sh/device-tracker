@@ -24,7 +24,7 @@ function Login({ onLogin }) {
     const url = "/authentication/login/";
     const data = { username: username, password: password };
     const headers = {
-      "accept": "application/json",
+      accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRFTOKEN":
         "ik3R0ILRns6Vdsd0ZZi7PxLWUgHyRjRvYxS2FE8JKQxjZwWVYAaKgKTGDOSmg4vu",
@@ -37,14 +37,16 @@ function Login({ onLogin }) {
         localStorage.setItem("refresh", refresh);
         setLoggedInUser({
           username: user.username,
-          pic:user.profile_image,
+          pic: user.profile_image,
           email: user.email,
           role: user.role,
           id: user.id,
-          name : user.name
+          name: user.name,
         });
         setError("");
-        navigate("/home");
+        setTimeout(() => {
+          navigate("/home");
+        }, 100);
         refreshTokenAutomatically();
       } else {
         setError("Invalid username or password.");
@@ -76,12 +78,12 @@ function Login({ onLogin }) {
           console.error("Error refreshing token:", error);
           localStorage.removeItem("access");
           localStorage.removeItem("refresh");
-          window.location.href = "/login"; 
+          window.location.href = "/login";
         }
       } else {
         console.error("No refresh token available");
       }
-    }, 1800000);
+    }, 240000);
 
     return intervalId;
   };
@@ -130,98 +132,109 @@ function Login({ onLogin }) {
           <Typography width={"100%"} textAlign={"center"} fontSize={"84px"}>
             خوش آمدید
           </Typography>
-          <Stack
-            gap={"54px"}
-            width={"50%"}
-            justifyContent={"center"}
-            alignItems={"center"}
+          <form
+            style={{ width: "100%" , display:"flex",flexDirection:"column" , justifyContent:"center", alignItems:"center" }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
           >
-            <Stack width={"100%"} gap={"24px"}>
-              <TextField
-                label="نام کاربری"
-                required
-                type="text"
-                value={username}
-                dir="rtl"
-                fullWidth
-                onChange={(e) => setUsername(e.target.value)}
-                sx={{
-                  "& .MuiInputBase-root": {
-                    borderRadius: "12px",
-                    paddingX: "12px",
-                  },
-                  "& .MuiInputLabel-root": {
-                    position: "relative",
-                    top: "20px",
-                    right: "30px",
-                    transformOrigin: "right",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused , .MuiInputLabel-shrink": {
-                    right: "29px",
-                    top: "16px",
-                  },
-                }}
-              />
-              <TextField
-                label="کلمه عبور"
-                required
-                type="password"
-                value={password}
-                dir="rtl"
-                fullWidth
-                onChange={(e) => setPassword(e.target.value)}
-                sx={{
-                  "& .MuiInputBase-root": {
-                    borderRadius: "12px",
-                    paddingX: "12px",
-                  },
-                  "& .MuiInputLabel-root": {
-                    position: "relative",
-                    top: "20px",
-                    right: "30px",
-                    padding: "0",
-                    margin: "0",
-                    transformOrigin: "right",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused , .MuiInputLabel-shrink": {
-                    right: "29px",
-                    top: "16px",
-                  },
-                }}
-              />
-            </Stack>
-            <Button
-              variant="contained"
-              onClick={handleLogin}
-              sx={{
-                borderRadius: "12px",
-                width: "100%",
-                fontWeight: "500",
-              }}
+            <Stack
+              gap={"54px"}
+              width={"50%"}
+              justifyContent={"center"}
+              alignItems={"center"}
             >
-              <Typography
-                fontSize={"32px"}
-                paddingBottom={"16px"}
-                fontWeight={"700"}
+              <Stack width={"100%"} gap={"24px"}>
+                <TextField
+                  label="نام کاربری"
+                  required
+                  type="text"
+                  value={username}
+                  dir="rtl"
+                  fullWidth
+                  onChange={(e) => setUsername(e.target.value)}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      borderRadius: "12px",
+                      paddingX: "12px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      position: "relative",
+                      top: "20px",
+                      right: "30px",
+                      transformOrigin: "right",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused , .MuiInputLabel-shrink":
+                      {
+                        right: "29px",
+                        top: "16px",
+                      },
+                  }}
+                />
+                <TextField
+                  label="کلمه عبور"
+                  required
+                  type="password"
+                  value={password}
+                  dir="rtl"
+                  fullWidth
+                  onChange={(e) => setPassword(e.target.value)}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      borderRadius: "12px",
+                      paddingX: "12px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      position: "relative",
+                      top: "20px",
+                      right: "30px",
+                      padding: "0",
+                      margin: "0",
+                      transformOrigin: "right",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused , .MuiInputLabel-shrink":
+                      {
+                        right: "29px",
+                        top: "16px",
+                      },
+                  }}
+                />
+              </Stack>
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={handleLogin}
+                sx={{
+                  borderRadius: "12px",
+                  width: "100%",
+                  fontWeight: "500",
+                }}
               >
-                ورود
-              </Typography>
-            </Button>
-            <Snackbar
-              open={error}
-              autoHideDuration={3000}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              <Alert
+                <Typography
+                  fontSize={"32px"}
+                  paddingBottom={"16px"}
+                  fontWeight={"700"}
+                >
+                  ورود
+                </Typography>
+              </Button>
+              <Snackbar
+                open={error}
+                autoHideDuration={3000}
                 onClose={handleClose}
-                severity="error"
-                sx={{ width: "100%" }}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
               >
-                ! نام کاربری و کلمه عبور اشتباه است
-              </Alert>
-            </Snackbar>
-          </Stack>
+                <Alert
+                  onClose={handleClose}
+                  severity="error"
+                  sx={{ width: "100%" }}
+                >
+                  ! نام کاربری و کلمه عبور اشتباه است
+                </Alert>
+              </Snackbar>
+            </Stack>
+          </form>
         </Stack>
         <Stack
           sx={{
