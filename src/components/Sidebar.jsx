@@ -54,7 +54,7 @@ function Sidebar() {
       srcWhite: "src/assets/Icons/lock-black.png",
       alt: "setting",
       text: "قفل ها",
-      path: "/setting",
+      path: "/locks",
     },
   ];
   return (

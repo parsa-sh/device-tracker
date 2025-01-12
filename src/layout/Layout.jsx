@@ -21,7 +21,7 @@ function Layout() {
         <Box width={"100%"} height={"100vh"}>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/setting" element={<Setting />} />
+            <Route path="/locks" element={<Setting />} />
             <Route path="/devices" element={<AddDevice />} />
             <Route
               path="/user"
