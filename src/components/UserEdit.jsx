@@ -5,6 +5,7 @@ import {
   IconButton,
   InputBase,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useUserStore } from "../utils/userStore";
@@ -111,7 +112,6 @@ function UserEdit({ onClose }) {
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
               defaultValue={loggedInUser.username}
-              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               نام کاربری
@@ -125,7 +125,6 @@ function UserEdit({ onClose }) {
             <InputBase
               sx={theme === "dark" ? { color: "white" } : { color: "black" }}
               defaultValue={loggedInUser.email}
-              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               ایمیل
@@ -137,41 +136,32 @@ function UserEdit({ onClose }) {
             alignItems={"center"}
           >
             <InputBase
-              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              defaultValue={loggedInUser.companyCode}
-              dir="rtl"
-            />
-            <Typography color={theme === "dark" ? "white" : "black"}>
-              کد پرسنلی
-            </Typography>
-          </Stack>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <InputBase
-              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              defaultValue={loggedInUser.password}
+              sx={
+                theme === "dark"
+                  ? { color: "white", borderBottom: "1px solid white" }
+                  : { color: "black", borderBottom: "1px solid black" }
+              }
               type="password"
-              dir="rtl"
-            />
-            <Typography color={theme === "dark" ? "white" : "black"}>
-              کلمه عبور
-            </Typography>
-          </Stack>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <InputBase
-              sx={theme === "dark" ? { color: "white" } : { color: "black" }}
-              placeholder="8 رقم و ترکیبی از اعداد و حروف"
-              dir="rtl"
             />
             <Typography color={theme === "dark" ? "white" : "black"}>
               کلمه عبور جدید
+            </Typography>
+          </Stack>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <InputBase
+              type="password"
+              sx={
+                theme === "dark"
+                  ? { color: "white", borderBottom: "1px solid white" }
+                  : { color: "black", borderBottom: "1px solid black" }
+              }
+            />
+            <Typography color={theme === "dark" ? "white" : "black"}>
+              تکرار کلمه عبور جدید
             </Typography>
           </Stack>
         </Stack>
