@@ -22,6 +22,8 @@ function LocksPopup({popup , history , handleClose}) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              overflowX:"hidden"
+
             }
           : { visibility: "hidden" }
       }
@@ -54,6 +56,8 @@ function LocksPopup({popup , history , handleClose}) {
                   borderRadius: "24px",
                   padding: "24px",
                   fontSize: "54px",
+              overflowX:"hidden"
+
                 }
           }
         >
