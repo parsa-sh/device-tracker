@@ -29,13 +29,14 @@ body{
     visibility: hidden;
     color: white;
     transition: ease-in-out 0.1s;
-    font-weight: 700;
     user-select: none;
+    font-size:12px;
+    font-weight: 700;
     margin-top: -5px;
   }
   .sidebar-icons {
     object-fit: cover;
-    width: 60px;
+    width: 42px;
     padding: 7px;
     transition: ease-in-out 0.1s;
     border-radius: 12px;
@@ -73,15 +74,16 @@ body{
     visibility: hidden;
     color: black;
     transition: ease-in-out 0.1s;
-    font-weight: 700;
     user-select: none;
     margin-top: -5px;
+    font-size:12px;
+    font-weight: 700;
 
   }
   .sidebar-icons-light {
     object-fit: cover;
     color: black;
-    width: 60px;
+    width: 42px;
     padding: 7px;
     transition: ease-in-out 0.1s;
     border-radius: 12px;

@@ -66,8 +66,8 @@ function Sidebar() {
           ? { backgroundColor: "white" }
           : { backgroundColor: "#1C1C1E" }
       }
-      height={"90vh"}
-      minWidth={"120px"}
+      height={"100vh"}
+      minWidth={"80px"}
       borderLeft={"2px solid black"}
     >
       <Stack
@@ -112,12 +112,13 @@ function Sidebar() {
           bottom={"12px"}
           right={"0"}
         >
-          <BedtimeIcon color="primary" />
+          <BedtimeIcon color="primary" sx={{fontSize:"18px"}} />
           <Switch
             checked={theme === "dark" ? true : false}
             onChange={toggleTheme}
+            size="small"
           />
-          <LightModeIcon color="warning" />
+          <LightModeIcon color="warning" sx={{fontSize:"18px"}}/>
         </Stack>
       </Stack>
     </Box>

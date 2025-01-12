@@ -47,7 +47,7 @@ function Appbar() {
           : { backgroundColor: "#1C1C1E" }
       }
       width={"100%"}
-      height={"100px"}
+      height={"80px"}
       borderBottom={"2px solid black"}
     >
       <Stack direction={"row-reverse"} height={"100%"}>
@@ -138,7 +138,7 @@ function Appbar() {
           justifyContent={"flex-end"}
           alignItems={"center"}
         >
-          <Box
+          {/* <Box
             display={"flex"}
             flexDirection={"row"}
             alignItems={"center"}
@@ -177,7 +177,7 @@ function Appbar() {
                   : { color: "white", fontSize: "32px" }
               }
             />
-          </Box>
+          </Box> */}
         </Stack>
         <Stack
           width={"150px"}
