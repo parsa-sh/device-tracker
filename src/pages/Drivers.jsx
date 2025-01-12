@@ -94,7 +94,7 @@ function Drivers() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://192.168.88.17:8000/api/drivers/`,
+        `http://192.168.88.21:8000/api/drivers/`,
         {
           params: { page: page + 1 },
         }

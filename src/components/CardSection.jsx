@@ -16,17 +16,19 @@ function CardSection() {
         <Stack
           direction={"row-reverse"}
           position={"fixed"}
-          bottom={"12px"}
+          bottom={{xs:"",sm:"12px"}}
+          mt={{xs:"12px" , sm:""}}
           left={"50%"}
           zIndex={"10000"}
-          height={"100px"}
-          width={"700px"}
+          height={"120px"}
+          width={{xs:"320px",sm:"700px"}}
           bgcolor={theme==="light"?"white":"#1C1C1E"}
           borderRadius={"12px"}
           justifyContent={"space-between"}
           alignItems={"center"}
           paddingX={"12px"}
           gap={"48px"}
+
           sx={{ transform: "translate(-50%)" }}
         >
           <img
@@ -40,10 +42,10 @@ function CardSection() {
             justifyContent={"space-between"}
             color={theme==="light"?"black":"white"}
           >
-            <Typography>Company : {selectedCard.company}</Typography>
-            <Typography>IMEI : {selectedCard.imei}</Typography>
-            <Typography>Type : {selectedCard.type}</Typography>
-            <Typography>IsActive : {selectedCard.is_active===true ?"true":"false"}</Typography>
+            <Typography sx={{fontSize:{xs:"12px" , sm:"18px"}}}>Company : {selectedCard.company}</Typography>
+            <Typography sx={{fontSize:{xs:"12px" , sm:"18px"}}}>IMEI : {selectedCard.imei}</Typography>
+            <Typography sx={{fontSize:{xs:"12px" , sm:"18px"}}}>Type : {selectedCard.type}</Typography>
+            <Typography sx={{fontSize:{xs:"12px" , sm:"18px"}}}>IsActive : {selectedCard.is_active===true ?"true":"false"}</Typography>
           </Stack>
             <IconButton
               color="info"

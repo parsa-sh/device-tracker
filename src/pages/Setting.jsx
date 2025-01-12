@@ -91,7 +91,7 @@ function Setting() {
   const fetchData = async (page) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://192.168.88.17:8000/api/locks/`, {
+      const response = await axios.get(`http://192.168.88.21:8000/api/locks/`, {
         params: { page: page + 1 },
       });
       const { results, count } = response.data;
@@ -147,9 +147,10 @@ function Setting() {
         overflow={"hidden"}
         justifyContent={"center"}
         padding={"12px"}
-        maxHeight={"100vh"}
+        maxHeight={{ xs: "65vh", sm: "100vh" }}
+
       >
-        <Stack maxWidth={"91vw"} minHeight={"80vh"} maxHeight={"100vh"}>
+        <Stack maxWidth={"91vw"} minHeight={"80vh"} maxHeight={{ xs: "65vh", sm: "100vh" }}>
           <DataGrid
             pagination
             rows={row}

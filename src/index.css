@@ -36,8 +36,9 @@ body {
   }
   .sidebar-icons {
     object-fit: cover;
-    width: 42px;
     padding: 7px;
+    width: 45px;
+    height: 45px;
     transition: ease-in-out 0.1s;
     border-radius: 12px;
   }
@@ -82,8 +83,9 @@ body {
   .sidebar-icons-light {
     object-fit: cover;
     color: black;
-    width: 42px;
     padding: 7px;
+    width: 45px;
+    height: 45px;
     transition: ease-in-out 0.1s;
     border-radius: 12px;
   }
@@ -107,4 +109,9 @@ body {
   font-weight: bold;
   color: rgb(0, 0, 0);
   visibility: visible;
+}
+.sidebar-icons.small,
+.sidebar-icons-light.small {
+  width: 30px;
+  height: 30px;
 }

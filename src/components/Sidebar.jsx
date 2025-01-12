@@ -1,5 +1,5 @@
 import { Box, Stack, Switch } from "@mui/material";
-import { Link , useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useThemeStore } from "../utils/userStore";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -60,35 +60,40 @@ function Sidebar() {
   return (
     <Box
       display={"flex"}
-      flexDirection={"column"}
+      flexDirection={{ xs: "row", sm: "column" }}
       justifyContent={"center"}
+      position={{ xs: "fixed", sm: "relative" }}
+      bottom={{ xs: "0" }}
+      left={{ xs: "0" }}
       sx={
         theme === "light"
           ? { backgroundColor: "white" }
           : { backgroundColor: "#1C1C1E" }
       }
-      height={"100vh"}
-      minWidth={"80px"}
-      borderLeft={"2px solid black"}
+      height={{ xs: "12%", sm: "100Vh" }}
+      zIndex={{ xs: "100000", sm: "0" }}
+      width={{ xs: "100vw", sm: "85px" }}
+      borderLeft={{ sm: "2px solid black" }}
+      borderTop={{ xs: "2px solid black", sm: "none" }}
     >
       <Stack
-        direction={"column"}
+        direction={{ xs: "row", sm: "column" }}
         justifyContent={"center"}
         alignItems={"center"}
-        gap={"18px"}
-        marginBottom={'54px'}
+        gap={{xs:"3px",sm:"12px"}}
+        marginBottom={{ sx: "0", sm: "54px" }}
       >
         {imageArray.map((e) => (
           <div
-          className={
-            theme === "light"
-              ? location.pathname === e.path
-                ? "sidebar-icon-container-light active"
-                : "sidebar-icon-container-light"
-              : location.pathname === e.path
-              ? "sidebar-icon-container active"
-              : "sidebar-icon-container"
-          }
+            className={
+              theme === "light"
+                ? location.pathname === e.path
+                  ? "sidebar-icon-container-light active"
+                  : "sidebar-icon-container-light"
+                : location.pathname === e.path
+                ? "sidebar-icon-container active"
+                : "sidebar-icon-container"
+            }
             key={e.id}
           >
             <Link to={e.path}>
@@ -96,10 +101,18 @@ function Sidebar() {
                 className={
                   theme === "light"
                     ? location.pathname === e.path
-                      ? "sidebar-icons-light active"
+                      ? window.innerWidth < 600
+                        ? "sidebar-icons-light active small"
+                        : "sidebar-icons-light active"
+                      : window.innerWidth < 600
+                      ? "sidebar-icons-light small"
                       : "sidebar-icons-light"
                     : location.pathname === e.path
-                    ? "sidebar-icons active"
+                    ? window.innerWidth < 600
+                      ? "sidebar-icons active small"
+                      : "sidebar-icons active"
+                    : window.innerWidth < 600
+                    ? "sidebar-icons small"
                     : "sidebar-icons"
                 }
                 src={theme === "light" ? e.srcWhite : e.srcBlack}
@@ -125,17 +138,17 @@ function Sidebar() {
           direction={"row-reverse"}
           justifyContent={"space-between"}
           alignItems={"center"}
-          position={"absolute"}
-          bottom={"12px"}
-          right={"0"}
+          position={{ xs: "fixed", sm: "absolute" }}
+          top={{ xs: "28px", sm: "12px" }}
+          right={{ xs: "190px", sm: "0" }}
         >
-          <BedtimeIcon color="primary" sx={{fontSize:"18px"}} />
+          <BedtimeIcon color="primary" sx={{ fontSize: "18px" }} />
           <Switch
             checked={theme === "dark" ? true : false}
             onChange={toggleTheme}
             size="small"
           />
-          <LightModeIcon color="warning" sx={{fontSize:"18px"}}/>
+          <LightModeIcon color="warning" sx={{ fontSize: "18px" }} />
         </Stack>
       </Stack>
     </Box>

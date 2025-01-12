@@ -14,33 +14,40 @@ function Cards() {
 
   const apiGet = async () => {
     const headers = {
-      "accept": "application/json",
+      accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRFTOKEN":
         "ZWX49Bod8s0CgAIdvvE2qwDeJCo7fC1lF9MfOxL5vQr02Er8u6wFRJLYsazVEnFk",
     };
-    try {
-      const res = await axios.get(
-        "http://192.168.88.17:8000/api/devices/",
-        {headers}
-      );
-      const processedCards = res?.data.map((item) => {
-        if (item.last_location) {
-          const match = item.last_location.match(
-            /POINT\s\(([-\d.]+)\s([-\d.]+)\)/
-          );
-          if (match) {
-            const long = parseFloat(match[1]);
-            const lat = parseFloat(match[2]);
-            return { ...item, long, lat };
+    let allDevices = [];
+    let nextUrl = "http://192.168.88.21:8000/api/devices/?page=1";
+
+    while (nextUrl) {
+      try {
+        const res = await axios.get(nextUrl, { headers });
+        const processedCards = res.data.results.map((item) => {
+          if (item.last_location) {
+            const match = item.last_location.match(
+              /POINT\s\(([-\d.]+)\s([-\d.]+)\)/
+            );
+            if (match) {
+              const long = parseFloat(match[1]);
+              const lat = parseFloat(match[2]);
+              return { ...item, long, lat };
+            }
           }
-        }
-        return item;
-      });
-      setCards(processedCards);
-    } catch (error) {
-      console.log(error);
+          return item;
+        });
+
+        allDevices = [...allDevices, ...processedCards];
+        nextUrl = res.data.next;
+      } catch (error) {
+        console.error(error);
+        nextUrl = null;
+      }
     }
+
+    setCards(allDevices);
   };
 
   useEffect(() => {
@@ -55,6 +62,7 @@ function Cards() {
       marginTop={"12px"}
       maxHeight={"80%"}
       width={"20%"}
+      visibility={{xs:"hidden" , sm:"visible"}}
       sx={{
         position: "absolute",
         zIndex: "1000",
@@ -117,7 +125,11 @@ function Cards() {
             padding={"12px"}
             onClick={() => handleCardClick(e)}
           >
-            <img src="src/assets/images/device.png" alt="" style={{ width: "70px" }} />
+            <img
+              src="src/assets/images/device.png"
+              alt=""
+              style={{ width: "70px" }}
+            />
             <Box display={"flex"} direction={"row"} gap={"18px"}>
               <Typography
                 color={theme === "light" ? "black" : "white"}

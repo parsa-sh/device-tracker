@@ -81,7 +81,7 @@ function Trucks() {
   const fetchData = async (page) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://192.168.88.17:8000/api/cars/`, {
+      const response = await axios.get(`http://192.168.88.21:8000/api/cars/`, {
         params: { page: page + 1 },
       });
       const { results, count } = response.data;
@@ -117,9 +117,9 @@ function Trucks() {
         overflow={"hidden"}
         justifyContent={"center"}
         padding={"12px"}
-        maxHeight={"100vh"}
+        maxHeight={{ xs: "65vh", sm: "100vh" }}
       >
-        <Stack maxWidth={"100vw"} maxHeight={"100vh"}>
+        <Stack maxWidth={"100vw"} maxHeight={{ xs: "65vh", sm: "100vh" }}>
           <DataGrid
             pagination
             rows={row}
@@ -154,26 +154,25 @@ function Trucks() {
                     "& .grid--cell": {
                       color: "white",
                     },
-                    "& .MuiDataGrid-filler":{
-                      background:"#1C1C1E"
+                    "& .MuiDataGrid-filler": {
+                      background: "#1C1C1E",
                     },
-                    "& .MuiTablePagination-displayedRows":{
-                      visibility:"hidden"
+                    "& .MuiTablePagination-displayedRows": {
+                      visibility: "hidden",
                     },
-                    "& .MuiTablePagination-actions":{
-                      display:"flex",
-                      flexDirection:"row-reverse",
-                      "& .MuiSvgIcon-root":{
-                      fontSize:"24px",
-                      background:"#e8e8e8",
-                      borderRadius:"50%"
+                    "& .MuiTablePagination-actions": {
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      "& .MuiSvgIcon-root": {
+                        fontSize: "24px",
+                        background: "#e8e8e8",
+                        borderRadius: "50%",
+                      },
                     },
+
+                    "& .MuiToolbar-root": {
+                      paddingY: "20px",
                     },
-                    
-                    "& .MuiToolbar-root":{
-                      paddingY:"20px"
-                    },
-                    
                   }
                 : {
                     borderRadius: "12px",
@@ -190,22 +189,21 @@ function Trucks() {
                       backgroundColor: "white",
                       color: "black",
                     },
-                    "& .MuiTablePagination-displayedRows":{
-                      visibility:"hidden"
+                    "& .MuiTablePagination-displayedRows": {
+                      visibility: "hidden",
                     },
-                    "& .MuiTablePagination-actions":{
-                      display:"flex",
-                      flexDirection:"row-reverse",
-                      "& .MuiSvgIcon-root":{
-                      fontSize:"24px",
-                      background:"#e8e8e8",
-                      borderRadius:"50%"
+                    "& .MuiTablePagination-actions": {
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      "& .MuiSvgIcon-root": {
+                        fontSize: "24px",
+                        background: "#e8e8e8",
+                        borderRadius: "50%",
+                      },
                     },
-                    },
-                    
-                    "& .MuiToolbar-root":{
-                      paddingY:"20px",
-                      
+
+                    "& .MuiToolbar-root": {
+                      paddingY: "20px",
                     },
                   }
             }

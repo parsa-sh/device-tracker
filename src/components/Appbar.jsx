@@ -58,22 +58,30 @@ function Appbar() {
           justifyContent={"flex-start"}
           alignItems={"center"}
           paddingRight={"24px"}
-          gap={"12px"}
+          gap={"5px"}
         >
           <img
             src={`http://192.168.88.17:8000${loggedInUser.pic}`}
             alt="user-pic"
             style={{
-              width: "65px",
-              height: "60px",
+              width: "54px",
+              height: "54px",
               borderRadius: "12px",
             }}
           />
           <Typography
             sx={
               theme === "light"
-                ? { color: "black", fontWeight: "900", fontSize: "18px" }
-                : { color: "white", fontWeight: "900", fontSize: "18px" }
+                ? {
+                    color: "black",
+                    fontWeight: "900",
+                    fontSize: { xs: "10px", sm: "18px" },
+                  }
+                : {
+                    color: "white",
+                    fontWeight: "900",
+                    fontSize: { xs: "10px", sm: "18px" },
+                  }
             }
           >
             {loggedInUser.name}
@@ -105,7 +113,7 @@ function Appbar() {
                 position={"absolute"}
                 zIndex={"1000"}
                 top={"30px"}
-                right={"0px"}
+                right={{xs:"",sm:"0px"}}
                 gap={"12px"}
                 border={
                   theme === "light" ? "0.5px solid grey" : "0.5px solid white"
@@ -131,13 +139,13 @@ function Appbar() {
             )}
           </Stack>
         </Stack>
-        <Stack
+        {/* <Stack
           width={"100%"}
           height={"100%"}
           direction={"row"}
           justifyContent={"flex-end"}
           alignItems={"center"}
-        >
+        > */}
           {/* <Box
             display={"flex"}
             flexDirection={"row"}
@@ -178,7 +186,7 @@ function Appbar() {
               }
             />
           </Box> */}
-        </Stack>
+        {/* </Stack> */}
         <Stack
           width={"150px"}
           display={"flex"}

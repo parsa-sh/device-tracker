@@ -14,6 +14,11 @@ function AddDevice() {
   const [popup, setPopup] = useState(false);
   const [popup2, setPopup2] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [rowCount, setRowCount] = useState(0);
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 5,
+  });
   const columns = [
     {
       field: "id",
@@ -110,33 +115,49 @@ function AddDevice() {
       ),
     },
   ];
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://192.168.88.17:8000/api/devices/"
-        );
-        const formattedRows = response.data.map((r) => ({
+
+  const fetchData = async (page) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        `http://192.168.88.21:8000/api/devices/`,
+        {
+          params: { page: page + 1 },
+        }
+      );
+
+      const { results, count } = response.data;
+      setRow(
+        results.map((r) => ({
           id: r.id,
           imei: r.imei,
           type: r.type,
           company: r.company,
           is_active: r.is_active,
-        }));
-        setRow(formattedRows);
-      } catch (error) {
-        console.log("error fetching driver data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+        }))
+      );
+      setRowCount(count);
+    } catch (error) {
+      console.log("error fetching driver data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const { page, pageSize } = paginationModel;
+    fetchData(page, pageSize);
+  }, [paginationModel]);
+
+  const handlePaginationChange = (model) => {
+    setPaginationModel(model);
+  };
 
   const handleHistorySelect = useCallback(async (arg) => {
     try {
       const res = await axios.get(
-        `http://192.168.88.17:8000/api/devices/${arg}/locks/`
+        `http://192.168.88.21:8000/api/devices/${arg}/locks/`
       );
       setLockHistory(res.data);
       setPopup(true);
@@ -148,14 +169,12 @@ function AddDevice() {
   const handleMapSelect = useCallback(async (arg) => {
     try {
       const res = await axios.get(
-        `http://192.168.88.17:8000/api/devices/${arg}/history/`
+        `http://192.168.88.21:8000/api/devices/${arg}/history/`
       );
 
       const processedCards = res?.data.map((item) => {
         if (item.geo) {
-          const match = item.geo.match(
-            /POINT\s\(([-\d.]+)\s([-\d.]+)\)/
-          );
+          const match = item.geo.match(/POINT\s\(([-\d.]+)\s([-\d.]+)\)/);
           if (match) {
             const long = parseFloat(match[1]);
             const lat = parseFloat(match[2]);
@@ -192,8 +211,10 @@ function AddDevice() {
         maxHeight={"100vh"}
       >
         <Stack maxWidth={"90vw"} maxHeight={"85vh"}>
-          <DataGrid
+        <DataGrid
+            pagination
             rows={row}
+            rowCount={rowCount}
             columns={columns}
             loading={loading}
             disableSelectionOnClick
@@ -201,7 +222,9 @@ function AddDevice() {
             disableColumnMenu={true}
             disableColumnResize={true}
             disableAutosize={true}
-            rowHeight={80}
+            paginationMode="server"
+            paginationModel={paginationModel}
+            onPaginationModelChange={handlePaginationChange}
             sx={
               theme === "dark"
                 ? {
