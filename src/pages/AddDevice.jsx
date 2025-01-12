@@ -4,12 +4,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useThemeStore } from "../utils/userStore";
 import axios from "axios";
 import DeviceLocksHistory from "../components/DeviceLocksHistory";
+import DeviceMapHistory from "../components/DeviceMapHistory";
 
 function AddDevice() {
   const [row, setRow] = useState([]);
   const { theme } = useThemeStore();
   const [lockHistory, setLockHistory] = useState([]);
+  const [map, setMap] = useState([]);
   const [popup, setPopup] = useState(false);
+  const [popup2, setPopup2] = useState(false);
   const [loading, setLoading] = useState(true);
   const columns = [
     {
@@ -95,6 +98,14 @@ function AddDevice() {
           >
             تاریخچه قفل ها
           </Button>
+          <Button
+            onClick={() => handleMapSelect(params.row.id)}
+            variant="contained"
+            sx={{ fontWeight: "700" }}
+            disableElevation
+          >
+            تاریخچه دستگاه
+          </Button>
         </div>
       ),
     },
@@ -134,11 +145,41 @@ function AddDevice() {
     }
   }, []);
 
-  console.log(lockHistory);
+  const handleMapSelect = useCallback(async (arg) => {
+    try {
+      const res = await axios.get(
+        `http://192.168.88.17:8000/api/devices/${arg}/history/`
+      );
+
+      const processedCards = res?.data.map((item) => {
+        if (item.geo) {
+          const match = item.geo.match(
+            /POINT\s\(([-\d.]+)\s([-\d.]+)\)/
+          );
+          if (match) {
+            const long = parseFloat(match[1]);
+            const lat = parseFloat(match[2]);
+            return { ...item, long, lat };
+          }
+        }
+        return item;
+      });
+
+      setMap(processedCards);
+      setPopup2(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const handleClose = () => {
     setPopup(false);
     setLockHistory([]);
+  };
+
+  const handleCloseMap = () => {
+    setPopup2(false);
+    setMap([]);
   };
 
   return (
@@ -243,6 +284,9 @@ function AddDevice() {
           handleClose={handleClose}
           lockHistory={lockHistory}
         />
+      )}
+      {popup2 && (
+        <DeviceMapHistory popup={popup2} map={map} close={handleCloseMap} />
       )}
     </Box>
   );
